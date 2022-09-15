@@ -15,6 +15,6 @@
        android:layout_gravity="center"
        app:iconSize="80dp"
        app:shapeAppearanceOverlay="@style/Theme.Pocket.FingerPrintButton"
-       app:icon="@drawable/fingerprint">
+       app:icon="@drawable/finger_print">
    </Button>
 </LinearLayout>

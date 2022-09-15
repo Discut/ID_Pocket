@@ -31,15 +31,11 @@ public class BiometricUtil {
         public void cancel() {
         }
 
-        ;
-
         /**
          * 错误次数超过五次
          */
         public void lockout() {
         }
-
-        ;
 
         /**
          * 失败次数太多
@@ -47,23 +43,17 @@ public class BiometricUtil {
         public void lockoutPermanent() {
         }
 
-        ;
-
         /**
          * 没有存储空间
          */
         public void noSpace() {
         }
 
-        ;
-
         /**
          * 验证超时
          */
         public void timeout() {
         }
-
-        ;
 
         /**
          * 验证失败
