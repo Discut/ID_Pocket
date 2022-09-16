@@ -1,3 +1,9 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="font_size_mini">12sp</dimen>
+    <dimen name="font_size_small">16sp</dimen>
+    <dimen name="font_size_normal">20sp</dimen>
+    <dimen name="font_size_large">26sp</dimen>
+
+    <dimen name="finger_size">70dp</dimen>
 </resources>
