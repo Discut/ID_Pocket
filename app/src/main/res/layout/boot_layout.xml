@@ -5,16 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-
+    android:orientation="vertical"
+    android:theme="@style/Theme.Pocket.FingerPrintLayout"
     tools:context=".activities.BootActivity">
-   <Button
-       android:id="@+id/fingerprint_btn"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:orientation="vertical"
-       android:layout_gravity="center"
-       app:iconSize="80dp"
-       app:shapeAppearanceOverlay="@style/Theme.Pocket.FingerPrintButton"
-       app:icon="@drawable/finger_print">
-   </Button>
+      <Button
+          android:id="@+id/fingerprint_btn"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:layout_gravity="center"
+          app:iconSize="@dimen/finger_size"
+          style="@style/Widget.MaterialComponents.Button.TextButton"
+          app:shapeAppearanceOverlay="@style/Theme.Pocket.FingerPrintButton"
+          app:icon="@drawable/finger_print">
+      </Button>
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="@dimen/font_size_normal"
+         android:text="@string/finger_tips"/>
 </LinearLayout>
