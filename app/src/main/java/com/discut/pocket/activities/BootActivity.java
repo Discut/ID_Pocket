@@ -9,10 +9,16 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.WindowCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.discut.pocket.R;
 import com.discut.pocket.utils.BiometricUtil;
 
+/**
+ * 启动页activity
+ * @author Discut
+ * @version 1.0
+ */
 public class BootActivity extends AppCompatActivity {
 
 /*    @Override
@@ -33,24 +39,32 @@ public class BootActivity extends AppCompatActivity {
         getWindow().setNavigationBarColor(Color.TRANSPARENT);
 
 
+        checkBiometric(this);
         Button btn = findViewById(R.id.fingerprint_btn);
-        BootActivity bootActivity = this;
         btn.setOnClickListener(view -> {
-            BiometricUtil biometricUtil = new BiometricUtil();
-            biometricUtil.authenticate(bootActivity, new BiometricUtil.BiometricListener() {
-                @Override
-                public void failed() {
+            checkBiometric(this);
+        });
 
-                }
+    }
 
-                @Override
-                public void success() {
-                    Log.d("TAG", "success: 验证成功的消息");
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    finish();
-                }
+    /**
+     * 验证生物信息
+     * @param activity 当前activity
+     */
+    private void checkBiometric(FragmentActivity activity){
+        BiometricUtil biometricUtil = new BiometricUtil();
+        biometricUtil.authenticate(activity, new BiometricUtil.BiometricListener() {
+            @Override
+            public void failed() {
 
-            });
+            }
+
+            @Override
+            public void success() {
+                Log.d("TAG", "success: 验证成功的消息");
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
+            }
 
         });
     }
