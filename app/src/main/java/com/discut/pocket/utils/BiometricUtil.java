@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentActivity;
 
 /**
  * 生物验证类
+ * <p>https://blog.csdn.net/qq_34676644/article/details/118758483</p>
  * @author Discut
  * @version 1.0
  */
