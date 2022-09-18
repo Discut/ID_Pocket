@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.biometric.BiometricManager;
 import androidx.fragment.app.FragmentActivity;
 
-import com.discut.pocket.activities.MainActivity;
+import com.discut.pocket.view.MainActivity;
 import com.discut.pocket.mvp.BasePresenter;
 import com.discut.pocket.utils.BiometricUtil;
 import com.discut.pocket.view.IBootView;

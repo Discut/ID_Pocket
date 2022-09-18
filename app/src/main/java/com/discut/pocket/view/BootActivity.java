@@ -1,21 +1,23 @@
 package com.discut.pocket.view;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.WindowCompat;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.discut.pocket.R;
+import com.discut.pocket.configuration.BiometricConfig;
+import com.discut.pocket.configuration.ConfigFactory;
+import com.discut.pocket.configuration.ThemeConfig;
 import com.discut.pocket.mvp.BaseActivity;
 import com.discut.pocket.presenter.BootPresenter;
 
 /**
  * 启动页activity
+ *
  * @author Discut
  * @version 1.0
  */
@@ -24,8 +26,13 @@ public class BootActivity extends BaseActivity<BootPresenter, IBootView> impleme
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.boot_layout);
-
+        // 初始化系统
+        initSystem();
+        if (!BiometricConfig.getInstance().isUse()) {
+            navigateTo(MainActivity.class);
+            return;
+        }
+        // 验证硬件
         this.presenter.initBiometricDevice(getApplicationContext());
 
         this.presenter.bootBiometric(this);
@@ -34,6 +41,26 @@ public class BootActivity extends BaseActivity<BootPresenter, IBootView> impleme
             this.presenter.bootBiometric(this);
         });
 
+    }
+
+    @Override
+    protected int containerLayout() {
+        return R.layout.boot_layout;
+    }
+
+    private void initSystem() {
+        ConfigFactory.initConfig(this);
+        switch (ThemeConfig.getInstance().getMode()) {
+            case LIGHT:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+            case DARK:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+            default:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                break;
+        }
     }
 
     @Override
