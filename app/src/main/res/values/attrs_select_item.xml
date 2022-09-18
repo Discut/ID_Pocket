@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SelectItem">
+        <attr name="selectItemTitle" format="string"/>
+        <attr name="selectItemDetails" format="string"/>
+        <attr name="selectItemDialogTitle" format="string"/>
+    </declare-styleable>
+</resources>

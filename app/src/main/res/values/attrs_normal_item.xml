@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NormalItem">
+        <attr name="normalItemTitle" format="string"/>
+        <attr name="normalItemDetails" format="string"/>
+    </declare-styleable>
+</resources>

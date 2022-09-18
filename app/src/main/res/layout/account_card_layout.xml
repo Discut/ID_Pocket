@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:padding="5dp"
+    tools:ignore="MissingDefaultResource">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_box"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:elevation="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <RelativeLayout
+            android:background="@color/gray_200"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+            <LinearLayout
+                android:id="@+id/chips_box"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignBottom="@+id/card_title"
+                android:layout_height="wrap_content">
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/card_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/app_name"
+                android:textSize="18sp" />
+            <TextView
+                android:id="@+id/card_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:hint="@string/app_name"
+                android:paddingLeft="5dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/card_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:hint="@string/app_name"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>
+
