@@ -4,6 +4,8 @@
     <dimen name="font_size_small">16sp</dimen>
     <dimen name="font_size_normal">20sp</dimen>
     <dimen name="font_size_large">26sp</dimen>
+    <dimen name="font_size_bigger">30sp</dimen>
+    <dimen name="font_size_attention">35sp</dimen>
 
     <dimen name="finger_size">70dp</dimen>
 </resources>

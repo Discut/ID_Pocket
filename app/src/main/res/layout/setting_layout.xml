@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".view.SettingActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="128dp">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            style="@style/Theme.Pocket.TopBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contextClickable="false"
+            app:collapsedTitleTextAppearance="@style/TextAppearance.App.CollapsingToolbar.Collapsed"
+            app:expandedTitleMarginBottom="28dp"
+            app:expandedTitleMarginStart="30dp"
+            app:expandedTitleTextAppearance="@style/TextAppearance.App.CollapsingToolbar.Expanded"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:navigationIconTint="@color/white">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:elevation="0dp"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_arrow_back"
+                app:title="@string/setting_page_title" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+    <!-- Note: A RecyclerView can also be used -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.discut.pocket.component.SelectItem
+                android:id="@+id/select_theme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:selectItemDetails="跟随系统"
+                app:selectItemDialogTitle="选择主题"
+                app:selectItemTitle="@string/theme" />
+
+            <com.discut.pocket.component.NormalItem
+                android:id="@+id/export_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:normalItemDetails="@string/export_account_details"
+                app:normalItemTitle="@string/export_account" />
+
+            <com.discut.pocket.component.SwitchItem
+                android:id="@+id/verification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:switchItemDetails="@string/biological_verification_details"
+                app:switchItemTitle="@string/biological_verification" />
+
+            <com.discut.pocket.component.NormalItem
+                android:id="@+id/about_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:normalItemDetails="“啊这？随便开发玩玩啦。”——Discut"
+                app:normalItemTitle="@string/about" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -2,32 +2,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.discut.pocket.MainActivity">
-    <item
-        android:id="@+id/back"
+<!--    <item
+        android:id="@+id/menu_back"
         android:icon="@drawable/ic_arrow_back"
-        android:title="search"
-        android:contentDescription="1btn"
+        android:title="back"
         app:showAsAction="always"
-        />
+        />-->
     <item
-        android:id="@+id/search"
+        android:id="@+id/menu_home"
         android:icon="@drawable/ic_home"
-        android:title="search"
-        android:contentDescription="1btn"
+        android:fillColor="@android:color/white"
+        android:title="home"
         app:showAsAction="always"
         />
     <item
-        android:id="@+id/list"
+        android:id="@+id/menu_list"
         android:icon="@drawable/ic_list"
-        android:title="search"
-        android:contentDescription="1btn"
+        android:title="list"
         app:showAsAction="always"
         />
     <item
-        android:id="@+id/settings"
+        android:id="@+id/menu_settings"
         android:icon="@drawable/ic_settings"
-        android:title="search"
-        android:contentDescription="1btn"
+        android:title="setting"
         app:showAsAction="always"
         />
 </menu>
