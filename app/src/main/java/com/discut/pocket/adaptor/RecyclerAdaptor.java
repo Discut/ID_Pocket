@@ -13,7 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.discut.pocket.R;
+import com.discut.pocket.bean.Account;
 import com.discut.pocket.bean.ListItem;
+import com.discut.pocket.bean.Tag;
 import com.discut.pocket.component.AccountCard;
 import com.discut.pocket.utils.ColorTransform;
 
@@ -21,13 +23,13 @@ import java.util.List;
 
 public class RecyclerAdaptor extends RecyclerView.Adapter<RecyclerAdaptor.InnerHolder> {
 
-    private final List<ListItem> mdata;
+    private final List<Account> mdata;
     private Context context;
     //private ChipGroup chipGroup;
     private LinearLayout chipGroup;
     private ItemClickListener listener;
 
-    public RecyclerAdaptor(List<ListItem> mdata) {
+    public RecyclerAdaptor(List<Account> mdata) {
         this.mdata = mdata;
     }
 
@@ -106,22 +108,22 @@ public class RecyclerAdaptor extends RecyclerView.Adapter<RecyclerAdaptor.InnerH
             /*            this.view = (AccountCard) itemView;*/
         }
 
-        public void setData(ListItem listItem) {
+        public void setData(Account listItem) {
 /*            if (null == view.getTitle() || !view.getTitle().equals(listItem.title))
                 view.setTitle(listItem.title);
             view.setDetails(listItem.des);
             view.setMain(listItem.account);*/
 
-            title.setText(listItem.title);
-            details.setText(listItem.des);
-            account.setText(listItem.account);
+            title.setText(listItem.getTitle());
+            details.setText(listItem.getNote());
+            account.setText(listItem.getAccount());
 
-            if (chipGroup.getChildCount() == listItem.chips.length)
+            if (null == listItem.getTags() || chipGroup.getChildCount() == listItem.getTags().length)
                 return;
-            for (String text : listItem.chips) {
+            for (Tag tag : listItem.getTags()) {
                 @SuppressLint("ResourceType") TextView newChip =
                         (TextView) LayoutInflater.from(context).inflate(R.xml.chip_show, chipGroup, false);
-                newChip.setText(text);
+                newChip.setText(tag.getName());
                 newChip.setBackgroundTintList(ColorTransform.from(context.getResources(), R.color.purple_200));
                 chipGroup.addView(newChip);
             }
