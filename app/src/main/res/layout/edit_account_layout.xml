@@ -7,10 +7,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/Theme.Pocket.View"
-    android:fitsSystemWindows="true"
     tools:context=".view.EditAccountActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="128dp">
 
@@ -144,13 +144,13 @@
 
     </androidx.core.widget.NestedScrollView>
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/floating_action_button"
+        android:id="@+id/floating_action_button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
         android:transitionName="shared_element_account_edit"
-        android:text="保存"
+        android:text="@string/save"
         app:icon="@drawable/ic_add"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

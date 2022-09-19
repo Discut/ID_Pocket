@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="InfoCard">
+        <attr name="infoCardTitle" format="string"/>
+        <attr name="infoCardDetails" format="string"/>
+    </declare-styleable>
+</resources>

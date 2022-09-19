@@ -18,7 +18,7 @@
         android:layout_height="100dp">
 
         <RelativeLayout
-            android:background="@color/gray_200"
+            style="@style/Theme.Pocket.AccountCard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp">
@@ -44,8 +44,6 @@
                 android:layout_centerVertical="true"
                 android:hint="@string/app_name"
                 android:paddingLeft="5dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
                 android:textSize="25sp" />
 
             <TextView

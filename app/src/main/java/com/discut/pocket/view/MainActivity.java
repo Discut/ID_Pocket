@@ -105,4 +105,14 @@ public class MainActivity extends BaseActivity<MainPagePresenter, IMainView> imp
     private enum FragmentMode {
         HOME, LIST, NO_FRAGMENT
     }
+
+    public void hideBottomBar(){
+        BottomAppBar bottomAppBar = findViewById(R.id.bottomAppBar);
+        bottomAppBar.performHide();
+    }
+
+    public void showBottomBar(){
+        BottomAppBar bottomAppBar = findViewById(R.id.bottomAppBar);
+        bottomAppBar.performShow();
+    }
 }
