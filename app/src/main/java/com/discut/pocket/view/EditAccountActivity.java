@@ -42,6 +42,10 @@ public class EditAccountActivity extends BaseActivity<EditAccountPresenter, IEdi
         transform4.addTarget(R.id.edit_account_layout_content).setDuration(200);
         getWindow().setSharedElementReturnTransition(transform4);
 
+
+
+
+
         initListener();
     }
 
