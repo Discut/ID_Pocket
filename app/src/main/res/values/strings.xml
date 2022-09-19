@@ -34,5 +34,6 @@
     <string name="note">备注</string>
     <string name="tag">标签</string>
     <string name="save">保存</string>
+    <string name="account_list">账号列表</string>
 
 </resources>
