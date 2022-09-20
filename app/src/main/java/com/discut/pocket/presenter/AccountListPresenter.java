@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountListPresenter extends BasePresenter<IAccountListView> {
-    public void update(){
+    public void update(Tag selectedTag){
         IAccountListView iAccountListView = reference.get();
 
         ArrayList<Account> accountList = new ArrayList<>();

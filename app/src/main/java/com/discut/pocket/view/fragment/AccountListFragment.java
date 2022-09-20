@@ -7,9 +7,10 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,16 +20,15 @@ import com.discut.pocket.adaptor.RecyclerAdaptor;
 import com.discut.pocket.bean.Account;
 import com.discut.pocket.bean.Tag;
 import com.discut.pocket.mvp.BaseFragment;
-import com.discut.pocket.mvp.IView;
 import com.discut.pocket.presenter.AccountListPresenter;
 import com.discut.pocket.utils.ColorTransform;
 import com.discut.pocket.view.MainActivity;
 import com.discut.pocket.view.ShowAccountActivity;
 import com.discut.pocket.view.intf.IAccountListView;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.transition.MaterialSharedAxis;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AccountListFragment extends BaseFragment<AccountListPresenter, IAccountListView> implements IAccountListView {
@@ -63,7 +63,7 @@ public class AccountListFragment extends BaseFragment<AccountListPresenter, IAcc
     @Override
     public void onStart() {
         super.onStart();
-        presenter.update();
+        presenter.update(null);
     }
 
     @Override
@@ -105,24 +105,41 @@ public class AccountListFragment extends BaseFragment<AccountListPresenter, IAcc
         ChipGroup chipGroup = findViewBy(R.id.chips_container);
         if (chipGroup.getChildCount() != 0)
             chipGroup.removeAllViews();
-// todo
-        @SuppressLint("ResourceType") TextView defaultChip =
-                (TextView) LayoutInflater.from(getContext()).inflate(R.xml.chip_item, chipGroup, false);
+        @SuppressLint("ResourceType") Chip defaultChip =
+                (Chip) LayoutInflater.from(getContext()).inflate(R.xml.chip_item, chipGroup, false);
         defaultChip.setText("全部");
+        defaultChip.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            int color;
+            if (isChecked) {
+                color = ResourcesCompat.getColor(getResources(), R.color.chip_background_color, null);
+            } else {
+                color = ResourcesCompat.getColor(getResources(), R.color.chip_background_color, null);
+            }
+            defaultChip.setChipBackgroundColor(ColorStateList.valueOf(color));
+        });
         chipGroup.addView(defaultChip);
+
         for (Tag tag :
                 tags) {
-            @SuppressLint("ResourceType") TextView newChip =
-                    (TextView) LayoutInflater.from(getContext()).inflate(R.xml.chip_item, chipGroup, false);
+            @SuppressLint("ResourceType") Chip newChip =
+                    (Chip) LayoutInflater.from(getContext()).inflate(R.xml.chip_item, chipGroup, false);
             newChip.setText(tag.getName());
-            int color;
-            if (null == tag.getColor() || tag.getColor().equals(""))
-                color = ColorTransform.from("#FFBB86FC");
-            else
-                color = ColorTransform.from(tag.getColor());
-
-            newChip.setBackgroundColor(color);
+            newChip.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                int color;
+                if (isChecked) {
+                    if (null == tag.getColor() || tag.getColor().equals(""))
+                        color = ColorTransform.from("#FFBB86FC");
+                    else
+                        color = ColorTransform.from(tag.getColor());
+                    presenter.update(tag);
+                } else {
+                    color = ResourcesCompat.getColor(getResources(), R.color.chip_background_color, null);
+                }
+                newChip.setChipBackgroundColor(ColorStateList.valueOf(color));
+            });
             chipGroup.addView(newChip);
         }
+        Chip childAt = (Chip) chipGroup.getChildAt(0);
+        childAt.setChecked(true);
     }
 }
