@@ -1,6 +1,5 @@
 package com.discut.pocket.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.discut.pocket.R;
@@ -8,6 +7,7 @@ import com.discut.pocket.adaptor.TagInputAdaptor;
 import com.discut.pocket.component.TagInputView;
 import com.discut.pocket.mvp.BaseActivity;
 import com.discut.pocket.presenter.EditAccountPresenter;
+import com.discut.pocket.view.intf.IEditAccountView;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.transition.platform.MaterialContainerTransform;

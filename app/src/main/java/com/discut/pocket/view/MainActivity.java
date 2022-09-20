@@ -6,9 +6,7 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Pair;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.discut.pocket.R;
 import com.discut.pocket.mvp.BaseActivity;
+import com.discut.pocket.view.intf.IMainView;
 import com.discut.pocket.presenter.MainPagePresenter;
 import com.discut.pocket.view.fragment.AccountListFragment;
 import com.discut.pocket.view.fragment.HomeFragment;

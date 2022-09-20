@@ -13,9 +13,9 @@ public class ColorTransform {
         return ColorStateList.valueOf(ResourcesCompat.getColor(res, id, null));
     }
 
-    public static ColorStateList from(@NonNull String color) {
+    public static int from(@NonNull String color) {
         if (color.isEmpty())
             color = "#FFFFFF";
-        return ColorStateList.valueOf(Color.parseColor(color));
+        return (Color.parseColor(color));
     }
 }

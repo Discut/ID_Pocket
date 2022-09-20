@@ -2,11 +2,8 @@ package com.discut.pocket.view;
 
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
-import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -20,6 +17,7 @@ import com.discut.pocket.configuration.BiometricConfig;
 import com.discut.pocket.configuration.ThemeConfig;
 import com.discut.pocket.configuration.ThemeMode;
 import com.discut.pocket.mvp.BaseActivity;
+import com.discut.pocket.view.intf.ISettingView;
 import com.discut.pocket.presenter.SettingPresenter;
 import com.google.android.material.appbar.MaterialToolbar;
 

@@ -9,32 +9,70 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.discut.pocket.R;
 import com.discut.pocket.adaptor.RecyclerAdaptor;
-import com.discut.pocket.bean.ListItem;
+import com.discut.pocket.bean.Account;
+import com.discut.pocket.bean.Tag;
 import com.discut.pocket.mvp.BaseFragment;
+import com.discut.pocket.presenter.HomePresenter;
+import com.discut.pocket.view.intf.IHomeView;
 import com.discut.pocket.view.ShowAccountActivity;
 import com.google.android.material.transition.MaterialSharedAxis;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment<HomePresenter, IHomeView> implements IHomeView {
+
     @Override
-    protected void initView() {
+    protected void initView(View view) {
         setExitTransition(new MaterialSharedAxis(MaterialSharedAxis.X, true));
         setEnterTransition(new MaterialSharedAxis(MaterialSharedAxis.X, false));
 
+    }
 
-        List<ListItem> listItems = new ArrayList<>();
+    @Override
+    public void onStart() {
+        super.onStart();
+        presenter.update();
+    }
 
+    @Override
+    protected void initData() {
+/*        accountList = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
-            ListItem item = new ListItem();
-            item.title = "标题" + i;
-            item.des = "这是Card的介绍这是Card的介绍" + i;
-            item.account = "Siiiro@outlook.com";
-            item.chips = new String[]{"Chip1", "chip2"};
-            listItems.add(item);
-        }
-        RecyclerAdaptor adaptor = new RecyclerAdaptor(listItems);
+            Account account = new Account();
+            account.setTitle("账号标题"+i);
+            account.setAccount("账号内容"+i);
+            account.setNote("账号备注"+i);
+            account.setPassword("账号密码"+i);
+
+            Tag tag = new Tag();
+            tag.setName("12");
+            Tag tag2 = new Tag();
+            tag2.setName("34");
+
+            account.setTags(new Tag[]{tag, tag2});
+            accountList.add(account);
+        }*/
+    }
+
+    @Override
+    protected int baseLayoutId() {
+        return R.layout.home_fragment_layout;
+    }
+
+    @Override
+    protected HomePresenter createPresenter() {
+        return new HomePresenter();
+    }
+
+    @Override
+    public void showMsg(String msg) {
+
+    }
+
+    @Override
+    public void updateAccountList(List<Account> accounts) {
+        RecyclerAdaptor adaptor = new RecyclerAdaptor(accounts);
         adaptor.setListener(
                 new RecyclerAdaptor.ItemClickListener() {
                     @Override
@@ -46,16 +84,9 @@ public class HomeFragment extends BaseFragment {
                 }
         );
 
-
-        RecyclerView view = findViewBy(R.id.account_card_content);
-        view.setLayoutManager(new LinearLayoutManager(getContext()));
-        view.setAdapter(adaptor);
-
-    }
-
-    @Override
-    protected int baseLayoutId() {
-        return R.layout.home_fragment_layout;
+        RecyclerView recyclerView = findViewBy(R.id.account_card_content);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adaptor);
     }
 
 }

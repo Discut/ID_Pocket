@@ -1,4 +1,4 @@
-package com.discut.pocket.view;
+package com.discut.pocket.view.intf;
 
 import com.discut.pocket.mvp.IView;
 

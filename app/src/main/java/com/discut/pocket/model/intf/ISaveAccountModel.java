@@ -1,4 +1,4 @@
-package com.discut.pocket.model;
+package com.discut.pocket.model.intf;
 
 import com.discut.pocket.bean.Account;
 

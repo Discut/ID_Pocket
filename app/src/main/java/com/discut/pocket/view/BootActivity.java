@@ -14,6 +14,7 @@ import com.discut.pocket.configuration.ConfigFactory;
 import com.discut.pocket.configuration.ThemeConfig;
 import com.discut.pocket.mvp.BaseActivity;
 import com.discut.pocket.presenter.BootPresenter;
+import com.discut.pocket.view.intf.IBootView;
 
 /**
  * 启动页activity

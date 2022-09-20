@@ -1,5 +1,8 @@
 package com.discut.pocket.model;
 
+import com.discut.pocket.model.intf.IReadAccountModel;
+import com.discut.pocket.model.intf.ISaveAccountModel;
+
 public abstract class AccountModelAbstractFactory {
     private BaseAccountModel accountModel;
 

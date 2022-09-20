@@ -5,11 +5,11 @@ import android.view.View;
 import android.view.WindowInsets;
 import android.view.WindowManager;
 
-import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.discut.pocket.R;
 import com.discut.pocket.mvp.BaseActivity;
+import com.discut.pocket.view.intf.IShowAccountView;
 import com.discut.pocket.presenter.ShowAccountPresenter;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.transition.platform.MaterialContainerTransform;
@@ -25,13 +25,10 @@ public class ShowAccountActivity extends BaseActivity<ShowAccountPresenter, ISho
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-        findViewById(R.id.extra).setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
-            @Override
-            public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {
-                int top = WindowInsetsCompat.toWindowInsetsCompat(insets, v).getInsets(WindowInsetsCompat.Type.statusBars()).top;
-                v.setPaddingRelative(v.getPaddingStart(), top, v.getPaddingEnd(), v.getPaddingBottom());
-                return insets;
-            }
+        findViewById(R.id.extra).setOnApplyWindowInsetsListener((v, insets) -> {
+            int top = WindowInsetsCompat.toWindowInsetsCompat(insets, v).getInsets(WindowInsetsCompat.Type.statusBars()).top;
+            v.setPaddingRelative(v.getPaddingStart(), top, v.getPaddingEnd(), v.getPaddingBottom());
+            return insets;
         });
 
 
