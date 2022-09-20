@@ -77,6 +77,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, IHomeView> impleme
                 new RecyclerAdaptor.ItemClickListener() {
                     @Override
                     public void onClick(View v) {
+                        v.setTransitionName("transform_to_account_view");
                         Intent intent = new Intent(getContext(), ShowAccountActivity.class);
                         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), v, "transform_to_account_view");
                         startActivity(intent, options.toBundle());

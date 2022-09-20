@@ -1,10 +1,13 @@
 package com.discut.pocket.view.fragment;
 
+import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
+
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -83,11 +86,13 @@ public class AccountListFragment extends BaseFragment<AccountListPresenter, IAcc
 
     @Override
     public void updateAccountList(@NonNull List<Account> accounts) {
+        Log.d(TAG, "updateAccountList: 更新item");
         RecyclerAdaptor adaptor = new RecyclerAdaptor(accounts);
         adaptor.setListener(
                 new RecyclerAdaptor.ItemClickListener() {
                     @Override
                     public void onClick(View v) {
+                        v.setTransitionName("transform_to_account_view");
                         Intent intent = new Intent(getContext(), ShowAccountActivity.class);
                         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), v, "transform_to_account_view");
                         startActivity(intent, options.toBundle());

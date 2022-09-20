@@ -9,7 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountListPresenter extends BasePresenter<IAccountListView> {
+    boolean key = false;
     public void update(Tag selectedTag){
+    // TODO 在没有进行account更新时，请不要更新界面 这样会吧item一起更新 导致item丢失transitionName 动画无法正确返回
+        if (key)
+            return;
         IAccountListView iAccountListView = reference.get();
 
         ArrayList<Account> accountList = new ArrayList<>();
@@ -38,7 +42,7 @@ public class AccountListPresenter extends BasePresenter<IAccountListView> {
             tag.setColor("#d7c5e6");
             tags.add(tag);
         }
-
+key=true;
         iAccountListView.updateTags(tags);
     }
 }
