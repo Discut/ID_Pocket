@@ -35,6 +35,10 @@
     <style name="Theme.Pocket.AccountCard" parent="">
         <item name="android:background">@color/gray</item>
     </style>
+    <!--Chip-->
+    <style name="Theme.Pocket.Chip" parent="">
+        <item name="android:textColor">@color/white</item>
+    </style>
 
     <style name="Theme.Pocket.NoActionBar" parent="Theme.Pocket">
         <item name="android:statusBarColor">@color/black</item>

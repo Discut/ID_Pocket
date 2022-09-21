@@ -43,6 +43,7 @@
             android:layout_width="match_parent"
             style="@style/Theme.Pocket.View"
             android:layout_height="wrap_content"
+            app:layout_collapseMode="pin"
             android:scrollbars="none">
 
             <com.google.android.material.chip.ChipGroup
@@ -51,7 +52,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:elevation="0dp"
-                app:layout_collapseMode="pin"
                 app:singleLine="true"
                 app:singleSelection="true">
 
@@ -73,11 +73,11 @@
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
     </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/account_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_collapseMode="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView

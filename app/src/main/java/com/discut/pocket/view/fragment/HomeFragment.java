@@ -2,6 +2,7 @@ package com.discut.pocket.view.fragment;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -76,10 +77,13 @@ public class HomeFragment extends BaseFragment<HomePresenter, IHomeView> impleme
         adaptor.setListener(
                 new RecyclerAdaptor.ItemClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(View v, Account account) {
                         v.setTransitionName("transform_to_account_view");
                         Intent intent = new Intent(getContext(), ShowAccountActivity.class);
                         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), v, "transform_to_account_view");
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("account", account);
+                        intent.putExtras(bundle);
                         startActivity(intent, options.toBundle());
                     }
                 }

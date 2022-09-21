@@ -1,6 +1,12 @@
 package com.discut.pocket.bean;
 
-public class Tag {
+import java.io.Serializable;
+
+public class Tag implements Serializable {
+    private static final long serialVersionUID = 2L;
+    private String name;
+    private String color;
+
     public String getName() {
         return name;
     }
@@ -17,6 +23,4 @@ public class Tag {
         this.color = color;
     }
 
-    private String name;
-    private String color;
 }

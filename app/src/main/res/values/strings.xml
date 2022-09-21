@@ -22,7 +22,7 @@
     <string name="account_add">账号添加</string>
     <string name="account_modify">账号修改</string>
     <string name="theme">主题</string>
-    <string name="export_account">导出账号信息</string>
+    <string name="export_account">导出账号</string>
     <string name="export_account_details">将会导出所有账号信息</string>
     <string name="biological_verification">生物信息验证</string>
     <string name="biological_verification_details">App将在启动时验证您的生物信息</string>

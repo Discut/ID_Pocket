@@ -69,7 +69,7 @@ public class RecyclerAdaptor extends RecyclerView.Adapter<RecyclerAdaptor.InnerH
     }
 
     public abstract static class ItemClickListener {
-        public abstract void onClick(View v);
+        public abstract void onClick(View v, Account account);
 
         public void onLongClick(View v) {
         }
@@ -80,6 +80,7 @@ public class RecyclerAdaptor extends RecyclerView.Adapter<RecyclerAdaptor.InnerH
         private final TextView title;
         private final TextView details;
         private final TextView account;
+        //private final View item;
         /*        private final AccountCard view;*/
 
         public InnerHolder(@NonNull View itemView) {
@@ -89,34 +90,22 @@ public class RecyclerAdaptor extends RecyclerView.Adapter<RecyclerAdaptor.InnerH
             title = itemView.findViewById(R.id.card_title);
             details = itemView.findViewById(R.id.card_details);
             account = itemView.findViewById(R.id.card_main);
-            itemView.findViewById(R.id.card_box).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-/*
-                    RelativeLayout view = (RelativeLayout) v;
-                    view.setTransitionName("shared_element_container");
-                    MyFragment myFragment = MyFragment.newInstance("data1", "data2");
-                    myFragment.setSharedElementEnterTransition(new MaterialContainerTransform());
-*/
-                    if (listener != null) {
-                        listener.onClick(v);
-                    }
-
-
-                }
-            });
-            /*            this.view = (AccountCard) itemView;*/
+            //item = itemView;
         }
 
         public void setData(Account listItem) {
-/*            if (null == view.getTitle() || !view.getTitle().equals(listItem.title))
-                view.setTitle(listItem.title);
-            view.setDetails(listItem.des);
-            view.setMain(listItem.account);*/
 
             title.setText(listItem.getTitle());
             details.setText(listItem.getNote());
             account.setText(listItem.getAccount());
+            itemView.findViewById(R.id.card_box).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onClick(v, listItem);
+                    }
+                }
+            });
 
             if (null == listItem.getTags() || chipGroup.getChildCount() == listItem.getTags().length)
                 return;

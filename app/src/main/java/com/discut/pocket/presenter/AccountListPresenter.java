@@ -25,9 +25,9 @@ public class AccountListPresenter extends BasePresenter<IAccountListView> {
             account.setPassword("账号密码"+i);
 
             Tag tag = new Tag();
-            tag.setName("12");
+            tag.setName("Google");
             Tag tag2 = new Tag();
-            tag2.setName("34");
+            tag2.setName("Steam");
 
             account.setTags(new Tag[]{tag, tag2});
             accountList.add(account);

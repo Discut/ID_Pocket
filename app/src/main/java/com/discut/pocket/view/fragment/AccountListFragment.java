@@ -7,6 +7,7 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,10 +92,13 @@ public class AccountListFragment extends BaseFragment<AccountListPresenter, IAcc
         adaptor.setListener(
                 new RecyclerAdaptor.ItemClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(View v, Account account) {
                         v.setTransitionName("transform_to_account_view");
                         Intent intent = new Intent(getContext(), ShowAccountActivity.class);
                         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), v, "transform_to_account_view");
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("account", account);
+                        intent.putExtras(bundle);
                         startActivity(intent, options.toBundle());
                     }
                 }
