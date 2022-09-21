@@ -52,6 +52,26 @@
                 app:selectItemDialogTitle="选择主题"
                 app:selectItemTitle="@string/theme" />
 
+            <com.discut.pocket.component.SelectItem
+                android:id="@+id/select_boot_page"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:selectItemDetails="已选择「最近使用」"
+                app:selectItemDialogTitle="选择启动页"
+                app:selectItemTitle="启动页" />
+
+
+            <com.discut.pocket.component.SwitchItem
+                android:id="@+id/animate_switch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:switchItemDetails="某些页面将会加入容器转换"
+                app:switchItemTitle="激进的动画" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <com.discut.pocket.component.NormalItem
                 android:id="@+id/export_account"
                 android:layout_width="match_parent"
@@ -59,13 +79,22 @@
                 app:normalItemDetails="@string/export_account_details"
                 app:normalItemTitle="@string/export_account" />
 
+            <com.discut.pocket.component.NormalItem
+                android:id="@+id/load_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:normalItemDetails="@string/export_account_details"
+                app:normalItemTitle="导入账号" />
+
             <com.discut.pocket.component.SwitchItem
                 android:id="@+id/verification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:switchItemDetails="@string/biological_verification_details"
                 app:switchItemTitle="@string/biological_verification" />
-
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
             <com.discut.pocket.component.NormalItem
                 android:id="@+id/about_item"
                 android:layout_width="match_parent"

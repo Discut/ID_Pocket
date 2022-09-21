@@ -14,6 +14,7 @@ import com.discut.pocket.adaptor.SelectItemAdaptor;
 import com.discut.pocket.component.SelectItem;
 import com.discut.pocket.component.SwitchItem;
 import com.discut.pocket.configuration.BiometricConfig;
+import com.discut.pocket.configuration.SystemConfig;
 import com.discut.pocket.configuration.ThemeConfig;
 import com.discut.pocket.configuration.ThemeMode;
 import com.discut.pocket.mvp.BaseActivity;
@@ -38,6 +39,16 @@ public class SettingActivity extends BaseActivity<SettingPresenter, ISettingView
     }
 
     private void initConfig() {
+
+        SelectItem selectBoot = findViewById(R.id.select_boot_page);
+        switch (SystemConfig.getInstance().getBootPage()) {
+            case "最近使用":
+                selectBoot.setDetails("已选择「最近使用」");
+                break;
+            case "账号列表":
+                selectBoot.setDetails("已选择「账号列表」");
+                break;
+        }
 
         SelectItem selectTheme = findViewById(R.id.select_theme);
         switch (ThemeConfig.getInstance().getMode()) {
@@ -95,6 +106,29 @@ public class SettingActivity extends BaseActivity<SettingPresenter, ISettingView
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                     break;
             }
+            initConfig();
+        });
+        // 启动页监听
+        // 主题选择监听
+        SelectItem selectBoot = findViewById(R.id.select_boot_page);
+        selectBoot.setAdaptor(new SelectItemAdaptor() {
+            @Override
+            public int getSelectedOption() {
+                String[] strings = {"最近使用", "账号列表"};
+                for (int i = 0; i < strings.length; i++) {
+                    if (SystemConfig.getInstance().getBootPage().equals(strings[i]))
+                        return i;
+                }
+                return 0;
+            }
+
+            @Override
+            public String[] getOptions() {
+                return new String[]{"最近使用", "账号列表"};
+            }
+        });
+        selectBoot.setOptionListener((v, option, which) -> {
+            SystemConfig.getInstance().setBootPage(option);
             initConfig();
         });
         // 生物信息验证监听
