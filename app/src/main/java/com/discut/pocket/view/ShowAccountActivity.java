@@ -1,21 +1,32 @@
 package com.discut.pocket.view;
 
+import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
-import android.view.WindowInsets;
+import android.view.LayoutInflater;
 import android.view.WindowManager;
+import android.widget.TextView;
 
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.discut.pocket.R;
+import com.discut.pocket.bean.Account;
+import com.discut.pocket.bean.Tag;
+import com.discut.pocket.component.InfoCard;
 import com.discut.pocket.mvp.BaseActivity;
-import com.discut.pocket.view.intf.IShowAccountView;
 import com.discut.pocket.presenter.ShowAccountPresenter;
+import com.discut.pocket.utils.ColorTransform;
+import com.discut.pocket.view.intf.IShowAccountView;
 import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.transition.platform.MaterialContainerTransform;
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback;
 
 public class ShowAccountActivity extends BaseActivity<ShowAccountPresenter, IShowAccountView> implements IShowAccountView {
+    private Account account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +41,12 @@ public class ShowAccountActivity extends BaseActivity<ShowAccountPresenter, ISho
             v.setPaddingRelative(v.getPaddingStart(), top, v.getPaddingEnd(), v.getPaddingBottom());
             return insets;
         });
+    }
 
-
+    @Override
+    protected void init() {
+        super.init();
+        account = (Account) getIntent().getSerializableExtra("account");
     }
 
     @Override
@@ -55,6 +70,30 @@ public class ShowAccountActivity extends BaseActivity<ShowAccountPresenter, ISho
         BottomAppBar bottomAppBar = findViewById(R.id.bottomAppBar);
         bottomAppBar.setNavigationOnClickListener(v -> onBackPressed());
 
+        // 设定数据
+
+        ((TextView) findViewById(R.id.account_title_card)).setText(account.getTitle());
+        ((InfoCard) findViewById(R.id.account_account_card)).setDetails(account.getAccount());
+        ((InfoCard) findViewById(R.id.account_password_card)).setDetails(account.getPassword());
+        ((InfoCard) findViewById(R.id.account_note_card)).setDetails(account.getNote());
+
+        ChipGroup chipGroup = (ChipGroup) findViewById(R.id.account_tags_card);
+        for (Tag tag :
+                account.getTags()) {
+            @SuppressLint("ResourceType") Chip newChip =
+                    (Chip) LayoutInflater.from(this).inflate(R.xml.chip_item, chipGroup, false);
+            newChip.setText(tag.getName());
+            newChip.setTextColor(Color.WHITE);
+            newChip.setClickable(false);
+            int color;
+            if (null == tag.getColor() || tag.getColor().equals("")) {
+                color = ResourcesCompat.getColor(getResources(), R.color.chip_background_color, null);
+            } else {
+                color = ColorTransform.from(tag.getColor());
+            }
+            newChip.setChipBackgroundColor(ColorStateList.valueOf(color));
+            chipGroup.addView(newChip);
+        }
     }
 
     @Override
