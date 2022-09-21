@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.discut.pocket.R;
+import com.discut.pocket.configuration.SystemConfig;
 import com.discut.pocket.mvp.BaseActivity;
 import com.discut.pocket.view.intf.IMainView;
 import com.discut.pocket.presenter.MainPagePresenter;
@@ -53,7 +54,13 @@ public class MainActivity extends BaseActivity<MainPagePresenter, IMainView> imp
         super.init();
         fragments = new Fragment[]{new HomeFragment(), new AccountListFragment()};
         initListener();
-        switchFragmentTo(FragmentMode.HOME);
+
+        // 读取配置的启动页
+        if (SystemConfig.getInstance().getBootPage().equals("最近使用")){
+            switchFragmentTo(FragmentMode.HOME);
+        }else {
+            switchFragmentTo(FragmentMode.LIST);
+        }
     }
 
     private void initListener() {
