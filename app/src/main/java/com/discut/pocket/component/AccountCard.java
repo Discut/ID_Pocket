@@ -7,15 +7,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.discut.pocket.R;
+import com.discut.pocket.bean.Account;
 import com.google.android.material.chip.ChipGroup;
 
 public class AccountCard extends RelativeLayout {
 
+    private Account account;
     private String title;
     private String details;
     private String main;
     private ChipGroup chipGroup;
-
     public AccountCard(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -27,6 +28,14 @@ public class AccountCard extends RelativeLayout {
 
         init();*/
 
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public String getTitle() {

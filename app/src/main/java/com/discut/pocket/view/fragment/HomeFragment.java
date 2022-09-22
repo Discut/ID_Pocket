@@ -2,32 +2,56 @@ package com.discut.pocket.view.fragment;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 
+import androidx.core.content.ContextCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.discut.pocket.R;
 import com.discut.pocket.adaptor.RecyclerAdaptor;
 import com.discut.pocket.bean.Account;
-import com.discut.pocket.bean.Tag;
+import com.discut.pocket.bean.AccountStatus;
+import com.discut.pocket.component.AccountCard;
+import com.discut.pocket.component.RecyclerAnimation;
+import com.discut.pocket.component.SwipeSelectMode;
 import com.discut.pocket.mvp.BaseFragment;
 import com.discut.pocket.presenter.HomePresenter;
-import com.discut.pocket.view.intf.IHomeView;
 import com.discut.pocket.view.ShowAccountActivity;
+import com.discut.pocket.view.intf.IHomeView;
 import com.google.android.material.transition.MaterialSharedAxis;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends BaseFragment<HomePresenter, IHomeView> implements IHomeView {
+
 
     @Override
     protected void initView(View view) {
         setExitTransition(new MaterialSharedAxis(MaterialSharedAxis.X, true));
         setEnterTransition(new MaterialSharedAxis(MaterialSharedAxis.X, false));
 
+        RecyclerView recyclerView = view.findViewById(R.id.account_card_content);
+        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.account_item_anim);
+        LayoutAnimationController layoutAnimationController = new LayoutAnimationController(animation);
+        layoutAnimationController.setOrder(LayoutAnimationController.ORDER_NORMAL);
+        layoutAnimationController.setDelay(0.2f);
+        recyclerView.setLayoutAnimation(layoutAnimationController);
+
+        // 自动适应布局
+        findViewBy(R.id.top_container).setOnApplyWindowInsetsListener((v, insets) -> {
+            int top = WindowInsetsCompat.toWindowInsetsCompat(insets, v).getInsets(WindowInsetsCompat.Type.statusBars()).top;
+            v.setPaddingRelative(v.getPaddingStart(), top, v.getPaddingEnd(), v.getPaddingBottom());
+            return insets;
+        });
     }
 
     @Override
@@ -70,9 +94,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, IHomeView> impleme
     public void showMsg(String msg) {
 
     }
-
-    @Override
-    public void updateAccountList(List<Account> accounts) {
+    private RecyclerAdaptor getAdaptor(List<Account> accounts){
         RecyclerAdaptor adaptor = new RecyclerAdaptor(accounts);
         adaptor.setListener(
                 new RecyclerAdaptor.ItemClickListener() {
@@ -88,10 +110,75 @@ public class HomeFragment extends BaseFragment<HomePresenter, IHomeView> impleme
                     }
                 }
         );
+        return adaptor;
+    }
 
+
+    @Override
+    public void updateAccountList(List<Account> accounts) {
         RecyclerView recyclerView = findViewBy(R.id.account_card_content);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adaptor);
+        if (recyclerView.getAdapter() == null) {
+            RecyclerAdaptor adaptor = new RecyclerAdaptor(accounts);
+            adaptor.setListener(
+                    new RecyclerAdaptor.ItemClickListener() {
+                        @Override
+                        public void onClick(View v, Account account) {
+                            v.setTransitionName("transform_to_account_view");
+                            Intent intent = new Intent(getContext(), ShowAccountActivity.class);
+                            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), v, "transform_to_account_view");
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("account", account);
+                            intent.putExtras(bundle);
+                            startActivity(intent, options.toBundle());
+                        }
+                    }
+            );
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            recyclerView.setAdapter(adaptor);
+        }
+
+        RecyclerAnimation recyclerAnimation = new RecyclerAnimation(getContext());
+
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(recyclerAnimation);
+
+        recyclerAnimation.setIcon(
+                        ContextCompat.getDrawable(getContext(), R.drawable.ic_add),
+                        ContextCompat.getDrawable(getContext(), R.drawable.ic_home))
+                .setBackColor(Color.BLUE, Color.GREEN)
+                .setMode(SwipeSelectMode.SHARE, SwipeSelectMode.DELETE)
+                .setListener(new RecyclerAnimation.SwipeListener() {
+                    @Override
+                    public void onLeftSwipe(RecyclerView.ViewHolder view, SwipeSelectMode mode) {
+                        Log.d("TAG", "onLeftSwipe: 向左滑动" + mode);
+
+                        recyclerAnimation.clearView(recyclerView, view);
+/*                        recyclerView.getAdapter().notifyItemChanged(view.getAdapterPosition());
+                        recyclerView.setAdapter(getAdaptor(accounts));*/
+                        recyclerView.getAdapter().notifyItemChanged(view.getAdapterPosition());
+
+
+                        recyclerView.setAdapter(getAdaptor(accounts));
+                        //itemTouchHelper.attachToRecyclerView(null);
+                        //itemTouchHelper.attachToRecyclerView(recyclerView);
+                    }
+                    @Override
+                    public void onRightSwipe(RecyclerView.ViewHolder view, SwipeSelectMode mode) {
+                        Log.d("TAG", "onRightSwipe: 向右滑动" + mode);
+                        recyclerView.removeView(view.itemView);
+                        AccountCard view1 = (AccountCard) view.itemView;
+                        Account account = view1.getAccount();
+                        account.setStatus(AccountStatus.DELETED);
+                        recyclerAnimation.clearView(recyclerView, view);
+                        presenter.update();
+                        recyclerView.removeView(view.itemView);
+                        recyclerView.getAdapter().notifyItemRemoved(view.getAdapterPosition());
+                        recyclerView.refreshDrawableState();
+                    }
+                });
+
+
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
 }

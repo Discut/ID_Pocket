@@ -39,6 +39,14 @@
     <style name="Theme.Pocket.Chip" parent="">
         <item name="android:textColor">@color/white</item>
     </style>
+    <!--字体主题-->
+    <style name="Theme.Pocket.Font.Primary" parent="">
+        <item name="android:textColor" >@color/font_color_primary</item>
+    </style>
+
+    <style name="Theme.Pocket.Font.Second" parent="">
+        <item name="android:textColor">@color/font_color_second</item>
+    </style>
 
     <style name="Theme.Pocket.NoActionBar" parent="Theme.Pocket">
         <item name="android:statusBarColor">@color/black</item>

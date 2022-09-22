@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.discut.pocket.R;
 import com.discut.pocket.adaptor.TagInputAdaptor;
+import com.discut.pocket.bean.Account;
 import com.discut.pocket.component.TagInputView;
 import com.discut.pocket.mvp.BaseActivity;
 import com.discut.pocket.presenter.EditAccountPresenter;
@@ -58,6 +59,7 @@ public class EditAccountActivity extends BaseActivity<EditAccountPresenter, IEdi
         // save按钮 点击事件
         ExtendedFloatingActionButton fab = findViewById(R.id.floating_action_button_save);
         fab.setOnClickListener(v -> {
+            Account account = new Account();
 
         });
     }

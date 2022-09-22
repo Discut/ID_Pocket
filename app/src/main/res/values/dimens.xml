@@ -8,4 +8,5 @@
     <dimen name="font_size_attention">35sp</dimen>
 
     <dimen name="finger_size">70dp</dimen>
+    <dimen name="top_bar_height">56dp</dimen>
 </resources>

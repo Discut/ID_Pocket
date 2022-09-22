@@ -20,8 +20,7 @@
             app:expandedTitleMarginBottom="28dp"
             app:expandedTitleMarginStart="30dp"
             app:expandedTitleTextAppearance="@style/TextAppearance.App.CollapsingToolbar.Expanded"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            app:navigationIconTint="@color/white">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/topAppBar"
@@ -30,6 +29,7 @@
                 android:elevation="0dp"
                 app:layout_collapseMode="pin"
                 app:navigationIcon="@drawable/ic_arrow_back"
+                app:navigationIconTint="@color/white"
                 app:title="@string/setting_page_title" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -68,6 +68,13 @@
                 app:switchItemDetails="某些页面将会加入容器转换"
                 app:switchItemTitle="激进的动画" />
 
+            <com.discut.pocket.component.SwitchItem
+                android:id="@+id/item_swipe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:switchItemDetails="已在「最近使用」页面添加滑动手势"
+                app:switchItemTitle="账号项Swipe手势" />
+
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -92,9 +99,11 @@
                 android:layout_height="wrap_content"
                 app:switchItemDetails="@string/biological_verification_details"
                 app:switchItemTitle="@string/biological_verification" />
+
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
             <com.discut.pocket.component.NormalItem
                 android:id="@+id/about_item"
                 android:layout_width="match_parent"

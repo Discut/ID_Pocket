@@ -7,6 +7,7 @@ import com.discut.pocket.model.intf.ISaveAccountModel;
 import java.util.List;
 
 public abstract class BaseAccountModel {
+    protected BaseAccountModel(){}
     private List<Account> accounts;
 
     protected ISaveAccountModel saveModel;

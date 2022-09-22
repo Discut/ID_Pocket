@@ -19,10 +19,10 @@ public class AccountListPresenter extends BasePresenter<IAccountListView> {
         ArrayList<Account> accountList = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             Account account = new Account();
-            account.setTitle("账号标题"+i);
-            account.setAccount("账号内容"+i);
-            account.setNote("账号备注"+i);
-            account.setPassword("账号密码"+i);
+            account.setTitle("Steam账号"+i);
+            account.setAccount("Siiiro@outlook.com"+i);
+            account.setNote("这是一个账号备注，账号注册于2002年。"+i);
+            account.setPassword("23199288530.。"+i);
 
             Tag tag = new Tag();
             tag.setName("Google");

@@ -2,12 +2,15 @@ package com.discut.pocket.mvp;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.WindowCompat;
+
+import com.discut.pocket.utils.WindowUtil;
 
 /**
  * Activity 基类
@@ -34,6 +37,10 @@ public abstract class BaseActivity <P extends BasePresenter, V extends IView> ex
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().setNavigationBarColor(Color.TRANSPARENT);
         }
+
+        WindowUtil.setStatusBarTextColor(this, getWindow().getStatusBarColor());
+
+        //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
 
     }
 

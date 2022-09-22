@@ -6,23 +6,26 @@
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/top_container"
+        style="@style/Theme.Pocket.View"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false">
         <!-- Scrollable content -->
         <LinearLayout
             android:id="@+id/linear_box"
+            style="@style/Theme.Pocket.View"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
                 style="@style/Theme.Pocket.PageTitle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/top_bar_height"
                 android:paddingStart="15dp"
-                android:paddingTop="30dp"
-                android:paddingBottom="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="@string/main_page_title"
                 app:layout_scrollFlags="scroll|enterAlways" />
 

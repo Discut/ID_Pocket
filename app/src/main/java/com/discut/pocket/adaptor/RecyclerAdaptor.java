@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.discut.pocket.R;
 import com.discut.pocket.bean.Account;
-import com.discut.pocket.bean.ListItem;
 import com.discut.pocket.bean.Tag;
 import com.discut.pocket.component.AccountCard;
 import com.discut.pocket.utils.ColorTransform;
@@ -47,7 +46,7 @@ public class RecyclerAdaptor extends RecyclerView.Adapter<RecyclerAdaptor.InnerH
     @Override
     public InnerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        View view = new AccountCard(context, null);//(AccountCard) AccountCard.inflate(context, R.layout.account_card_layout, null);
+        AccountCard view = new AccountCard(context, null);//(AccountCard) AccountCard.inflate(context, R.layout.account_card_layout, null);
 //        chipGroup = view.findViewById(R.id.account_card_chipGroup);
         chipGroup = view.findViewById(R.id.chips_box);
         return new InnerHolder(view);
@@ -80,6 +79,7 @@ public class RecyclerAdaptor extends RecyclerView.Adapter<RecyclerAdaptor.InnerH
         private final TextView title;
         private final TextView details;
         private final TextView account;
+        private final AccountCard accountCard;
         //private final View item;
         /*        private final AccountCard view;*/
 
@@ -90,11 +90,12 @@ public class RecyclerAdaptor extends RecyclerView.Adapter<RecyclerAdaptor.InnerH
             title = itemView.findViewById(R.id.card_title);
             details = itemView.findViewById(R.id.card_details);
             account = itemView.findViewById(R.id.card_main);
+            accountCard = (AccountCard) itemView;
             //item = itemView;
         }
 
         public void setData(Account listItem) {
-
+            accountCard.setAccount(listItem);
             title.setText(listItem.getTitle());
             details.setText(listItem.getNote());
             account.setText(listItem.getAccount());

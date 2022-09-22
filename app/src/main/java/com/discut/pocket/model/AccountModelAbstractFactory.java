@@ -9,8 +9,10 @@ public abstract class AccountModelAbstractFactory {
     protected abstract IReadAccountModel getReadModel();
     protected abstract ISaveAccountModel getSaveModel();
     protected abstract BaseAccountModel getAccountModel();
+    protected abstract void init();
 
     public BaseAccountModel create(){
+        init();
         accountModel = getAccountModel();
         accountModel.saveModel = getSaveModel();
         accountModel.readModel = getReadModel();

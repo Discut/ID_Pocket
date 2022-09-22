@@ -42,6 +42,14 @@
     <style name="Theme.Pocket.Chip" parent="">
         <item name="android:textColor">@color/black</item>
     </style>
+     <!--字体主题-->
+    <style name="Theme.Pocket.Font.Primary" parent="">
+        <item name="android:textColor" >@color/font_color_primary_night</item>
+    </style>
+
+    <style name="Theme.Pocket.Font.Second" parent="">
+        <item name="android:textColor">@color/font_color_second_night</item>
+    </style>
 
     <style name="Theme.Pocket.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -65,13 +73,14 @@
     </style>
 
     <style name="Theme.Pocket.PageTitle" parent="">
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/font_size_large</item>
         <item name="android:background">@color/theme_main_light</item>
     </style>
     <style name="TextAppearance.App.CollapsingToolbar.Expanded" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:textSize">@dimen/font_size_bigger</item>
         <item name="android:colorBackground">@color/black</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="TextAppearance.App.CollapsingToolbar.Collapsed" parent="TextAppearance.MaterialComponents.Headline6">
