@@ -13,13 +13,14 @@ import com.discut.pocket.R;
 import com.discut.pocket.adaptor.SelectItemAdaptor;
 import com.discut.pocket.component.SelectItem;
 import com.discut.pocket.component.SwitchItem;
+import com.discut.pocket.configuration.AnimationConfig;
 import com.discut.pocket.configuration.BiometricConfig;
 import com.discut.pocket.configuration.SystemConfig;
 import com.discut.pocket.configuration.ThemeConfig;
 import com.discut.pocket.configuration.ThemeMode;
 import com.discut.pocket.mvp.BaseActivity;
-import com.discut.pocket.view.intf.ISettingView;
 import com.discut.pocket.presenter.SettingPresenter;
+import com.discut.pocket.view.intf.ISettingView;
 import com.google.android.material.appbar.MaterialToolbar;
 
 public class SettingActivity extends BaseActivity<SettingPresenter, ISettingView> implements ISettingView {
@@ -64,21 +65,28 @@ public class SettingActivity extends BaseActivity<SettingPresenter, ISettingView
         }
 
         SwitchItem bio = findViewById(R.id.verification);
-        if (BiometricConfig.getInstance().isUse()){
+        if (BiometricConfig.getInstance().isUse()) {
             bio.setDetails("App将在启动时验证您的生物信息");
             bio.setCheck(true);
-        }else {
+        } else {
             bio.setDetails("App不会验证生物信息");
             bio.setCheck(false);
+        }
+
+        SwitchItem animation = findViewById(R.id.animate_switch);
+        if (AnimationConfig.getInstance().isEnableAnimation()) {
+            animation.setDetails("某些页面将会加入容器转换");
+            animation.setCheck(true);
+        } else {
+            animation.setDetails("现在已启用默认动画");
+            animation.setCheck(false);
         }
     }
 
     private void initListener() {
         // 导航键监听
         MaterialToolbar topBar = findViewById(R.id.topAppBar);
-        topBar.setNavigationOnClickListener(v -> {
-            finish();
-        });
+        topBar.setNavigationOnClickListener(v -> finish());
         // 主题选择监听
         SelectItem selectTheme = findViewById(R.id.select_theme);
         selectTheme.setAdaptor(new SelectItemAdaptor() {
@@ -144,6 +152,21 @@ public class SettingActivity extends BaseActivity<SettingPresenter, ISettingView
             @Override
             public void uncheck(SwitchItem view) {
                 BiometricConfig.getInstance().setUse(false);
+                initConfig();
+            }
+        });
+        // 动画选择监听器
+        SwitchItem animation = findViewById(R.id.animate_switch);
+        animation.setListener(new SwitchItem.CheckedListener() {
+            @Override
+            public void onCheck(SwitchItem view) {
+                AnimationConfig.getInstance().setEnableAnimation(true);
+                initConfig();
+            }
+
+            @Override
+            public void uncheck(SwitchItem view) {
+                AnimationConfig.getInstance().setEnableAnimation(false);
                 initConfig();
             }
         });

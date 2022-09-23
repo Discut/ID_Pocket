@@ -23,6 +23,7 @@ import com.discut.pocket.R;
 import com.discut.pocket.adaptor.RecyclerAdaptor;
 import com.discut.pocket.bean.Account;
 import com.discut.pocket.bean.Tag;
+import com.discut.pocket.configuration.AnimationConfig;
 import com.discut.pocket.mvp.BaseFragment;
 import com.discut.pocket.presenter.AccountListPresenter;
 import com.discut.pocket.utils.ColorTransform;
@@ -99,7 +100,11 @@ public class AccountListFragment extends BaseFragment<AccountListPresenter, IAcc
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("account", account);
                         intent.putExtras(bundle);
-                        startActivity(intent, options.toBundle());
+                        if (AnimationConfig.getInstance().isEnableAnimation()){
+                            startActivity(intent, options.toBundle());
+                        }else {
+                            startActivity(intent);
+                        }
                     }
                 }
         );

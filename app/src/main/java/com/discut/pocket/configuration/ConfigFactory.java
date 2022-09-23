@@ -7,5 +7,6 @@ public class ConfigFactory {
         ThemeConfig.getInstance().init(activity);
         BiometricConfig.getInstance().init(activity);
         SystemConfig.getInstance().init(activity);
+        AnimationConfig.getInstance().init(activity);
     }
 }

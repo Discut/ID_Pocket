@@ -2,6 +2,7 @@ package com.discut.pocket.view;
 
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.discut.pocket.R;
+import com.discut.pocket.configuration.AnimationConfig;
 import com.discut.pocket.configuration.SystemConfig;
 import com.discut.pocket.mvp.BaseActivity;
 import com.discut.pocket.view.intf.IMainView;
@@ -64,7 +66,7 @@ public class MainActivity extends BaseActivity<MainPagePresenter, IMainView> imp
     }
 
     private void initListener() {
-        BottomAppBar bottomAppBar = findViewById(R.id.bottomAppBar);
+        @SuppressLint("CutPasteId") BottomAppBar bottomAppBar = findViewById(R.id.bottomAppBar);
         bottomAppBar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.menu_home) {
                 switchFragmentTo(FragmentMode.HOME);
@@ -82,8 +84,12 @@ public class MainActivity extends BaseActivity<MainPagePresenter, IMainView> imp
         fba.setOnClickListener(v -> {
             Intent intent = new Intent(this, EditAccountActivity.class);
             //ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, v, "shared_element_account_edit");
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, findViewById(R.id.bottomAppBar), "edit_account_transform");
-            startActivity(intent, options.toBundle());
+            if (AnimationConfig.getInstance().isEnableAnimation()){
+                @SuppressLint("CutPasteId") ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, findViewById(R.id.bottomAppBar), "edit_account_transform");
+                startActivity(intent, options.toBundle());
+            }else {
+                startActivity(intent);
+            }
         });
     }
 

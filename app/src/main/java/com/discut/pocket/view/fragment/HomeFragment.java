@@ -23,6 +23,7 @@ import com.discut.pocket.bean.AccountStatus;
 import com.discut.pocket.component.AccountCard;
 import com.discut.pocket.component.RecyclerAnimation;
 import com.discut.pocket.component.SwipeSelectMode;
+import com.discut.pocket.configuration.AnimationConfig;
 import com.discut.pocket.mvp.BaseFragment;
 import com.discut.pocket.presenter.HomePresenter;
 import com.discut.pocket.view.ShowAccountActivity;
@@ -94,7 +95,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, IHomeView> impleme
     public void showMsg(String msg) {
 
     }
-    private RecyclerAdaptor getAdaptor(List<Account> accounts){
+
+    private RecyclerAdaptor getAdaptor(List<Account> accounts) {
         RecyclerAdaptor adaptor = new RecyclerAdaptor(accounts);
         adaptor.setListener(
                 new RecyclerAdaptor.ItemClickListener() {
@@ -106,7 +108,11 @@ public class HomeFragment extends BaseFragment<HomePresenter, IHomeView> impleme
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("account", account);
                         intent.putExtras(bundle);
-                        startActivity(intent, options.toBundle());
+                        if (AnimationConfig.getInstance().isEnableAnimation()) {
+                            startActivity(intent, options.toBundle());
+                        } else {
+                            startActivity(intent);
+                        }
                     }
                 }
         );
@@ -129,7 +135,11 @@ public class HomeFragment extends BaseFragment<HomePresenter, IHomeView> impleme
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("account", account);
                             intent.putExtras(bundle);
-                            startActivity(intent, options.toBundle());
+                            if (AnimationConfig.getInstance().isEnableAnimation()) {
+                                startActivity(intent, options.toBundle());
+                            } else {
+                                startActivity(intent);
+                            }
                         }
                     }
             );
@@ -162,6 +172,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, IHomeView> impleme
                         //itemTouchHelper.attachToRecyclerView(null);
                         //itemTouchHelper.attachToRecyclerView(recyclerView);
                     }
+
                     @Override
                     public void onRightSwipe(RecyclerView.ViewHolder view, SwipeSelectMode mode) {
                         Log.d("TAG", "onRightSwipe: 向右滑动" + mode);
