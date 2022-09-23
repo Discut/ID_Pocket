@@ -14,7 +14,13 @@ public class AccountModel extends BaseAccountModel{
 
     @Override
     public void update() {
-
+        for (Account account : accounts) {
+            boolean b = account.getStatus() == AccountStatus.NEW;
+            if (b){
+                saveModel.save(account);
+            }
+        }
+        accounts = readModel.readAll();
     }
 
     @Override

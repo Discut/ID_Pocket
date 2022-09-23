@@ -1,18 +1,25 @@
 package com.discut.pocket.view;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.discut.pocket.R;
 import com.discut.pocket.adaptor.TagInputAdaptor;
 import com.discut.pocket.bean.Account;
+import com.discut.pocket.bean.AccountStatus;
 import com.discut.pocket.component.TagInputView;
+import com.discut.pocket.model.AccountModelFactory;
+import com.discut.pocket.model.BaseAccountModel;
 import com.discut.pocket.mvp.BaseActivity;
 import com.discut.pocket.presenter.EditAccountPresenter;
 import com.discut.pocket.view.intf.IEditAccountView;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.transition.platform.MaterialContainerTransform;
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback;
+
+import java.util.List;
 
 public class EditAccountActivity extends BaseActivity<EditAccountPresenter, IEditAccountView> implements IEditAccountView {
 
@@ -59,8 +66,24 @@ public class EditAccountActivity extends BaseActivity<EditAccountPresenter, IEdi
         // save按钮 点击事件
         ExtendedFloatingActionButton fab = findViewById(R.id.floating_action_button_save);
         fab.setOnClickListener(v -> {
-            Account account = new Account();
+            Account newAccount = new Account();
+            String title = ((TextInputLayout)findViewById(R.id.edit_title)).getEditText().getText().toString();
+            String account = ((TextInputLayout)findViewById(R.id.edit_account)).getEditText().getText().toString();
+            String password = ((TextInputLayout)findViewById(R.id.edit_password)).getEditText().getText().toString();
+            String note = ((TextInputLayout)findViewById(R.id.edit_note)).getEditText().getText().toString();
+            newAccount.setTitle(title);
+            newAccount.setAccount(account);
+            newAccount.setPassword(password);
+            newAccount.setNote(note);
 
+            newAccount.setStatus(AccountStatus.NEW);
+
+            AccountModelFactory accountModelFactory = new AccountModelFactory();
+            BaseAccountModel baseAccountModel = accountModelFactory.create();
+            List<Account> all = baseAccountModel.getAll();
+            all.add(newAccount);
+            baseAccountModel.update();
+            finish();
         });
     }
 
