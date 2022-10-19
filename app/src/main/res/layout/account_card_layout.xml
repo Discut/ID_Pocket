@@ -65,7 +65,7 @@
                 android:layout_alignParentBottom="true"
                 android:ellipsize="end"
                 android:hint="@string/app_name"
-                android:maxLines="2"
+                android:maxLines="1"
                 android:textSize="12sp" />
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>

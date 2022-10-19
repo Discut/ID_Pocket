@@ -7,6 +7,7 @@ import com.discut.pocket.R;
 import com.discut.pocket.adaptor.TagInputAdaptor;
 import com.discut.pocket.bean.Account;
 import com.discut.pocket.bean.AccountStatus;
+import com.discut.pocket.bean.Tag;
 import com.discut.pocket.component.TagInputView;
 import com.discut.pocket.model.AccountModelFactory;
 import com.discut.pocket.model.BaseAccountModel;
@@ -23,12 +24,14 @@ import java.util.List;
 
 public class EditAccountActivity extends BaseActivity<EditAccountPresenter, IEditAccountView> implements IEditAccountView {
 
+    private TagInputAdaptor tagInputAdaptor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         TagInputView tagInputView = findViewById(R.id.edit_account_tag);
-        TagInputAdaptor tagInputAdaptor = new TagInputAdaptor(new String[]{"123", "456"});
+        tagInputAdaptor = new TagInputAdaptor();
         tagInputAdaptor.onCreateView(tagInputView);
         tagInputView.setAdaptor(tagInputAdaptor);
     }
@@ -71,10 +74,18 @@ public class EditAccountActivity extends BaseActivity<EditAccountPresenter, IEdi
             String account = ((TextInputLayout)findViewById(R.id.edit_account)).getEditText().getText().toString();
             String password = ((TextInputLayout)findViewById(R.id.edit_password)).getEditText().getText().toString();
             String note = ((TextInputLayout)findViewById(R.id.edit_note)).getEditText().getText().toString();
+
+            List<Tag> tag = tagInputAdaptor.getTag();
+            Tag[] tags = new Tag[tag.size()];
+            for (int i = 0; i < tag.size(); i++) {
+                tags[i] = tag.get(i);
+            }
+
             newAccount.setTitle(title);
             newAccount.setAccount(account);
             newAccount.setPassword(password);
             newAccount.setNote(note);
+            newAccount.setTags(tags);
 
             newAccount.setStatus(AccountStatus.NEW);
 

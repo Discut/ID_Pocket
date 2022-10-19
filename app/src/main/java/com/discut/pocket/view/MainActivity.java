@@ -54,7 +54,9 @@ public class MainActivity extends BaseActivity<MainPagePresenter, IMainView> imp
     @Override
     protected void init() {
         super.init();
-        fragments = new Fragment[]{new HomeFragment(), new AccountListFragment()};
+        if (fragments == null) {
+            fragments = new Fragment[]{new HomeFragment(), new AccountListFragment()};
+        }
         initListener();
 
         // 读取配置的启动页

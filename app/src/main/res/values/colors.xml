@@ -10,10 +10,10 @@
     <color name="theme_main_deep_dark">@color/black</color>
 
     <color name="font_color_primary">@color/white</color>
-    <color name="font_color_second">#CDCDCD</color>
+    <color name="font_color_second">#C6C6C6</color>
 
     <color name="font_color_primary_night">@color/black</color>
-    <color name="font_color_second_night">#272727</color>
+    <color name="font_color_second_night">#373737</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>

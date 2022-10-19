@@ -7,9 +7,9 @@ import androidx.annotation.NonNull;
 
 import com.discut.pocket.bean.Account;
 import com.discut.pocket.bean.AccountStatus;
+import com.discut.pocket.bean.Tag;
 import com.discut.pocket.model.intf.ISaveAccountModel;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class SaveAccountModel implements ISaveAccountModel {
@@ -42,6 +42,17 @@ public class SaveAccountModel implements ISaveAccountModel {
             return true;
         } else {
             return false;
+        }
+    }
+
+    private void saveTag(@NonNull Tag tag) {
+
+    }
+
+    private void saveTags(List<Tag> tags) {
+        for (Tag tag :
+                tags) {
+            saveTag(tag);
         }
     }
 }

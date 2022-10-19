@@ -7,7 +7,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -15,10 +14,10 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.view.ViewCompat;
 
 import com.discut.pocket.R;
 import com.discut.pocket.adaptor.base.BaseTagInputAdaptor;
+import com.discut.pocket.bean.Tag;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputLayout;
@@ -45,8 +44,6 @@ public class TagInputView extends ConstraintLayout {
         update();
         initListener();
     }
-
-
 
     public void setAdaptor(BaseTagInputAdaptor adaptor) {
         this.adaptor = adaptor;
