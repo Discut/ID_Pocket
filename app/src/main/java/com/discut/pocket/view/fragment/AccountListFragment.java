@@ -6,12 +6,10 @@ import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
@@ -21,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.discut.pocket.R;
 import com.discut.pocket.adaptor.RecyclerAdaptor;
-import com.discut.pocket.bean.Account;
+import com.discut.pocket.bean.account.Account;
 import com.discut.pocket.bean.Tag;
 import com.discut.pocket.configuration.AnimationConfig;
 import com.discut.pocket.mvp.BaseFragment;

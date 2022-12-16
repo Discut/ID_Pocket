@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.discut.pocket.R;
-import com.discut.pocket.bean.Account;
+import com.discut.pocket.bean.account.Account;
 import com.discut.pocket.bean.Tag;
 import com.discut.pocket.component.AccountCard;
 import com.discut.pocket.utils.ColorTransform;

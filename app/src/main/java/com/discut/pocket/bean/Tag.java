@@ -6,6 +6,15 @@ public class Tag implements Serializable {
     private static final long serialVersionUID = 2L;
     private String name;
     private String color;
+    private int accountId;
+
+    public int getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
+    }
 
     public String getName() {
         return name;

@@ -1,10 +1,14 @@
-package com.discut.pocket.bean;
+package com.discut.pocket.bean.account;
+
+
+import com.discut.pocket.bean.AccountStatus;
+import com.discut.pocket.bean.Tag;
 
 import java.io.Serializable;
 
 public class Account implements Serializable {
     private static final long serialVersionUID = 1L;
-    private String id;
+    private Long id;
     private String title;
     private String account;
     private String password;
@@ -13,11 +17,11 @@ public class Account implements Serializable {
     private AccountStatus status;
 
     public String getId() {
-        return id;
+        return id.toString();
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.id = Long.valueOf(id);
     }
 
     public String getTitle() {

@@ -1,6 +1,7 @@
 package com.discut.pocket.view;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;

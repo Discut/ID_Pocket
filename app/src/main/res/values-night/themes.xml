@@ -15,13 +15,20 @@
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/gray_100</item>
     </style>
+    <!--    child application theme-->
+    <style name="Theme.Pocket.Pink" parent="Theme.Pocket">
+        <item name="colorPrimaryVariant">@color/theme_main_deep_dark</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/black</item>
+    </style>
 
     <!--    <style name="Theme.Pocket.TopBar" parent="Widget.MaterialComponents.Toolbar">-->
     <style name="Theme.Pocket.TopBar" parent="">
         <item name="android:background">@color/theme_main_deep_dark</item>
     </style>
 
-<!--    布局背景-->
+    <!--    布局背景-->
     <style name="Theme.Pocket.View" parent="">
         <item name="android:background">@color/theme_main_deep_dark</item>
     </style>
@@ -41,7 +48,7 @@
     </style>
     <!--字体主题-->
     <style name="Theme.Pocket.Font.Primary" parent="">
-        <item name="android:textColor" >@color/font_color_primary</item>
+        <item name="android:textColor">@color/font_color_primary</item>
     </style>
 
     <style name="Theme.Pocket.Font.Second" parent="">

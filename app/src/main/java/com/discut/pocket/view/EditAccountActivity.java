@@ -1,11 +1,10 @@
 package com.discut.pocket.view;
 
 import android.os.Bundle;
-import android.view.View;
 
 import com.discut.pocket.R;
 import com.discut.pocket.adaptor.TagInputAdaptor;
-import com.discut.pocket.bean.Account;
+import com.discut.pocket.bean.account.Account;
 import com.discut.pocket.bean.AccountStatus;
 import com.discut.pocket.bean.Tag;
 import com.discut.pocket.component.TagInputView;
@@ -54,9 +53,6 @@ public class EditAccountActivity extends BaseActivity<EditAccountPresenter, IEdi
         getWindow().setSharedElementReturnTransition(transform4);
 
 
-
-
-
         initListener();
     }
 
@@ -70,10 +66,10 @@ public class EditAccountActivity extends BaseActivity<EditAccountPresenter, IEdi
         ExtendedFloatingActionButton fab = findViewById(R.id.floating_action_button_save);
         fab.setOnClickListener(v -> {
             Account newAccount = new Account();
-            String title = ((TextInputLayout)findViewById(R.id.edit_title)).getEditText().getText().toString();
-            String account = ((TextInputLayout)findViewById(R.id.edit_account)).getEditText().getText().toString();
-            String password = ((TextInputLayout)findViewById(R.id.edit_password)).getEditText().getText().toString();
-            String note = ((TextInputLayout)findViewById(R.id.edit_note)).getEditText().getText().toString();
+            String title = ((TextInputLayout) findViewById(R.id.edit_title)).getEditText().getText().toString();
+            String account = ((TextInputLayout) findViewById(R.id.edit_account)).getEditText().getText().toString();
+            String password = ((TextInputLayout) findViewById(R.id.edit_password)).getEditText().getText().toString();
+            String note = ((TextInputLayout) findViewById(R.id.edit_note)).getEditText().getText().toString();
 
             List<Tag> tag = tagInputAdaptor.getTag();
             Tag[] tags = new Tag[tag.size()];

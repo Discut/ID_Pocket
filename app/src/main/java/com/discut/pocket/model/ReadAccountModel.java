@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.NonNull;
 
-import com.discut.pocket.bean.Account;
+import com.discut.pocket.bean.account.Account;
 import com.discut.pocket.bean.Tag;
 import com.discut.pocket.model.intf.IReadAccountModel;
 

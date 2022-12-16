@@ -1,7 +1,6 @@
 package com.discut.pocket.view.intf;
 
-import com.discut.pocket.bean.Account;
-import com.discut.pocket.bean.Tag;
+import com.discut.pocket.bean.account.Account;
 import com.discut.pocket.mvp.IView;
 
 import java.util.List;

@@ -6,6 +6,12 @@
 <!--    <color name="theme_main_deep">#64b5f6</color>-->
         <color name="theme_main_deep">#055cad</color>
 
+    <color name="theme_main_light_pink">#0078d4</color>
+    <!--    <color name="theme_main">#6e9bc5</color>-->
+    <color name="theme_main_pink">@color/theme_main_light</color>
+    <!--    <color name="theme_main_deep">#64b5f6</color>-->
+    <color name="theme_main_deep_pink">#055cad</color>
+
     <color name="theme_main_dark">@color/gray</color>
     <color name="theme_main_deep_dark">@color/black</color>
 

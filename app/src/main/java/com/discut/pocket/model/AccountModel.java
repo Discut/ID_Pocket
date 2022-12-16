@@ -1,10 +1,8 @@
 package com.discut.pocket.model;
 
-import com.discut.pocket.bean.Account;
+import com.discut.pocket.bean.account.Account;
 import com.discut.pocket.bean.AccountStatus;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class AccountModel extends BaseAccountModel{

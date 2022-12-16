@@ -42,8 +42,8 @@ public class AccountModelFactory extends AccountModelAbstractFactory {
         if (!DatabaseUtil.isTableExist(db, "tag"))
             db.execSQL(tag_table);
 
-        String click_account_table = "CREATE TABLE click_account(account_id integer,FOREIGN KEY (account_id) REFERENCES account(id))";
+/*        String click_account_table = "CREATE TABLE click_account(account_id integer,FOREIGN KEY (account_id) REFERENCES account(id))";
         if (!DatabaseUtil.isTableExist(db, "click_account"))
-            db.execSQL(click_account_table);
+            db.execSQL(click_account_table);*/
     }
 }

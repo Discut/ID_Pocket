@@ -1,5 +1,6 @@
 package com.discut.pocket.mvp;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.WindowCompat;
 
+import com.discut.pocket.R;
 import com.discut.pocket.utils.WindowUtil;
 
 /**

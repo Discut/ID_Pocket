@@ -12,7 +12,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.discut.pocket.R;
-import com.discut.pocket.bean.Account;
+import com.discut.pocket.bean.account.Account;
 import com.discut.pocket.bean.Tag;
 import com.discut.pocket.component.InfoCard;
 import com.discut.pocket.mvp.BaseActivity;
