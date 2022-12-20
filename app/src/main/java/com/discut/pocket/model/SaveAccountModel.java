@@ -75,11 +75,26 @@ public class SaveAccountModel implements ISaveAccountModel {
         return delete > 0;
     }
 
+    @Override
+    public boolean update(Account account) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("account", account.getAccount());
+        contentValues.put("title", account.getTitle());
+        contentValues.put("password", account.getPassword());
+        contentValues.put("note", account.getNote());
+
+        ITagDao tagDao = new TagDao();
+        tagDao.deleteTagsBy(account.getId());
+        for (Tag tag : account.getTags()) {
+            tagDao.insert(tag);
+        }
+        return db.update("account", contentValues, "id=?", new String[]{account.getId()}) > 0;
+    }
+
     private void saveTag(@NonNull Tag tag) {
         if (!isExist(tag)) {
             tagDao.insert(tag);
         }
-        // TODO 在数据库保存Tag
     }
 
     private void saveTags(List<Tag> tags) {

@@ -57,7 +57,6 @@ public class MainActivity extends BaseActivity<MainPagePresenter, IMainView> imp
         if (fragments == null) {
             fragments = new Fragment[]{new HomeFragment(), new AccountListFragment()};
         }
-        initListener();
 
         // 读取配置的启动页
         if (SystemConfig.getInstance().getBootPage().equals("最近使用")){
@@ -67,7 +66,7 @@ public class MainActivity extends BaseActivity<MainPagePresenter, IMainView> imp
         }
     }
 
-    private void initListener() {
+    protected void initListener() {
         @SuppressLint("CutPasteId") BottomAppBar bottomAppBar = findViewById(R.id.bottomAppBar);
         bottomAppBar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.menu_home) {

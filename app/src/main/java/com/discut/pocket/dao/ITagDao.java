@@ -13,4 +13,6 @@ public interface ITagDao {
     boolean delete(Tag tag);
 
     boolean update(Tag tag);
+
+    boolean deleteTagsBy(String accountId);
 }

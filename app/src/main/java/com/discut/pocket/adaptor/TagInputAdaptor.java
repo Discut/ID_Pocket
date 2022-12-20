@@ -73,4 +73,6 @@ public class TagInputAdaptor extends BaseTagInputAdaptor<Tag> {
     public List<Tag> getTag() {
         return mData;
     }
+
+
 }

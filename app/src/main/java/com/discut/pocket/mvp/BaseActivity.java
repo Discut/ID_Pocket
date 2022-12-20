@@ -56,6 +56,10 @@ public abstract class BaseActivity<P, V extends IView> extends AppCompatActivity
         WindowUtil.setStatusBarTextColor(this, getWindow().getStatusBarColor());
 
         //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        initListener();
+    }
+
+    protected void initListener() {
 
     }
 

@@ -20,6 +20,9 @@ import com.discut.pocket.R;
 import com.discut.pocket.bean.account.Account;
 import com.discut.pocket.bean.Tag;
 import com.discut.pocket.component.InfoCard;
+import com.discut.pocket.model.AccountModelAbstractFactory;
+import com.discut.pocket.model.AccountModelFactory;
+import com.discut.pocket.model.BaseAccountModel;
 import com.discut.pocket.mvp.BaseActivity;
 import com.discut.pocket.mvp.BasePresenter;
 import com.discut.pocket.presenter.ShowAccountPresenter;
@@ -32,6 +35,8 @@ import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.transition.platform.MaterialContainerTransform;
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback;
+
+import java.util.List;
 
 public class ShowAccountActivity extends BaseActivity<IShowAccountPresenter, IShowAccountView> implements IShowAccountView {
     private Account account;
@@ -78,6 +83,11 @@ public class ShowAccountActivity extends BaseActivity<IShowAccountPresenter, ISh
         BottomAppBar bottomAppBar = findViewById(R.id.bottomAppBar);
         bottomAppBar.setNavigationOnClickListener(v -> onBackPressed());
 
+        initData();
+
+    }
+
+    private void initData() {
         // 设定数据
 
         ((TextView) findViewById(R.id.account_title_card)).setText(account.getTitle());
@@ -86,6 +96,7 @@ public class ShowAccountActivity extends BaseActivity<IShowAccountPresenter, ISh
         ((InfoCard) findViewById(R.id.account_note_card)).setDetails(account.getNote());
 
         ChipGroup chipGroup = findViewById(R.id.account_tags_card);
+        chipGroup.removeAllViews();
         for (Tag tag :
                 account.getTags()) {
             @SuppressLint("ResourceType") Chip newChip =
@@ -102,11 +113,25 @@ public class ShowAccountActivity extends BaseActivity<IShowAccountPresenter, ISh
             newChip.setChipBackgroundColor(ColorStateList.valueOf(color));
             chipGroup.addView(newChip);
         }
-
-        initListener();
     }
 
-    private void initListener() {
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        AccountModelAbstractFactory factory = new AccountModelFactory();
+        BaseAccountModel baseAccountModel = factory.create();
+        baseAccountModel.update();
+        List<Account> all = baseAccountModel.getAll();
+        for (Account account : all) {
+            if (account.getId().equals(account.getId())) {
+                this.account = account;
+                initData();
+                break;
+            }
+        }
+    }
+
+    protected void initListener() {
         BottomAppBar appBar = findViewById(R.id.bottomAppBar);
         appBar.setOnMenuItemClickListener(item -> {
                     switch (item.getItemId()) {
@@ -120,6 +145,9 @@ public class ShowAccountActivity extends BaseActivity<IShowAccountPresenter, ISh
                         }
                         case R.id.menu_modify: {
                             // TODO 修改account按钮点击事件
+                            Intent intent = new Intent(this, ModifyAccountActivity.class);
+                            intent.putExtra("account", account);
+                            startActivity(intent);
                             break;
                         }
                         case R.id.menu_delete: {

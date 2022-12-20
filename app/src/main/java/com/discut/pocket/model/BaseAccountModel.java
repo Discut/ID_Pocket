@@ -10,6 +10,7 @@ public abstract class BaseAccountModel {
     protected ISaveAccountModel saveModel;
     protected IReadAccountModel readModel;
     private List<Account> accounts;
+
     protected BaseAccountModel() {
     }
 
@@ -22,5 +23,7 @@ public abstract class BaseAccountModel {
     public abstract void saveAll();
 
     public abstract void save(List<Account> accounts);
+
+    public abstract void update(Account account);
 
 }

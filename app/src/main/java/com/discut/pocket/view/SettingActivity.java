@@ -31,7 +31,6 @@ public class SettingActivity extends BaseActivity<SettingPresenter, ISettingView
         super.onCreate(savedInstanceState);
 
         initConfig();
-        initListener();
     }
 
     @Override
@@ -83,7 +82,7 @@ public class SettingActivity extends BaseActivity<SettingPresenter, ISettingView
         }
     }
 
-    private void initListener() {
+    protected void initListener() {
         // 导航键监听
         MaterialToolbar topBar = findViewById(R.id.topAppBar);
         topBar.setNavigationOnClickListener(v -> finish());

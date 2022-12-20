@@ -18,13 +18,15 @@ public class AccountModel extends BaseAccountModel {
 
     @Override
     public void update() {
-        for (Account account : accounts) {
-            boolean b = account.getStatus() == AccountStatus.NEW;
-            if (b) {
-                saveModel.save(account);
+        if (accounts != null) {
+            for (Account account : accounts) {
+                boolean b = account.getStatus() == AccountStatus.NEW;
+                if (b) {
+                    saveModel.save(account);
+                }
             }
+            accounts = readModel.readAll();
         }
-        accounts = readModel.readAll();
     }
 
     @Override
@@ -43,6 +45,13 @@ public class AccountModel extends BaseAccountModel {
     @Override
     public void save(List<Account> accounts) {
         saveModel.saveAll(accounts);
+    }
+
+    @Override
+    public void update(Account account) {
+        if (account.getStatus() == AccountStatus.MODIFIED) {
+            saveModel.update(account);
+        }
     }
 
 

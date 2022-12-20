@@ -62,6 +62,12 @@ public class TagDao extends BaseDao<Tag> implements ITagDao {
     }
 
     @Override
+    public boolean deleteTagsBy(String accountId) {
+        int delete = getDB().delete(tableName(), "account_id=?", new String[]{accountId});
+        return delete > 0;
+    }
+
+    @Override
     protected ContentValues getContentValuesOf(Tag tag) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", tag.getName());

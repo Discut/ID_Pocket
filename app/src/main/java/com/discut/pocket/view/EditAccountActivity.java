@@ -8,6 +8,7 @@ import com.discut.pocket.bean.account.Account;
 import com.discut.pocket.bean.AccountStatus;
 import com.discut.pocket.bean.Tag;
 import com.discut.pocket.component.TagInputView;
+import com.discut.pocket.model.AccountModelAbstractFactory;
 import com.discut.pocket.model.AccountModelFactory;
 import com.discut.pocket.model.BaseAccountModel;
 import com.discut.pocket.mvp.BaseActivity;
@@ -53,10 +54,9 @@ public class EditAccountActivity extends BaseActivity<EditAccountPresenter, IEdi
         getWindow().setSharedElementReturnTransition(transform4);
 
 
-        initListener();
     }
 
-    private void initListener() {
+    protected void initListener() {
         // 设置回退键
         MaterialToolbar topAppBar = findViewById(R.id.topAppBar);
         topAppBar.setNavigationOnClickListener(v -> {

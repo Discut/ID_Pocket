@@ -10,4 +10,6 @@ public interface ISaveAccountModel {
     boolean save(Account account);
 
     boolean delete(Account account);
+
+    boolean update(Account account);
 }
