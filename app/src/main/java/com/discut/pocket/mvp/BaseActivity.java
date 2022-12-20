@@ -16,24 +16,37 @@ import com.discut.pocket.utils.WindowUtil;
 
 /**
  * Activity 基类
- * @version 1.0
- * @author Discut
+ *
  * @param <P> Presenter类
  * @param <V> View类
+ * @author Discut
+ * @version 1.0
  */
-public abstract class BaseActivity <P extends BasePresenter, V extends IView> extends AppCompatActivity {
+public abstract class BaseActivity<P, V extends IView> extends AppCompatActivity {
     protected P presenter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // 设定布局
         setContentView(containerLayout());
         // 绑定表示层 presenter
-        this.presenter = createPresenter();
-        this.presenter.attachView((V) this);
+
+        this.presenter = (P) createPresenter();
+        if (this.presenter instanceof BasePresenter)
+            ((BasePresenter<V>) this.presenter).attachView((V) this);
+        else
+            try {
+                throw new Exception("You need this class extend BasePresenter class.");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return;
+            }
+
+
         this.init();
         this.initView();
-        if (this.isAdaptGestures()){
+        if (this.isAdaptGestures()) {
             // 适配导航条
             WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -55,25 +68,37 @@ public abstract class BaseActivity <P extends BasePresenter, V extends IView> ex
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        this.presenter.detachView();
+        if (this.presenter instanceof BasePresenter)
+            ((BasePresenter<V>) this.presenter).detachView();
+        else
+            try {
+                throw new Exception("You need this class extend BasePresenter class.");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
     /**
      * 获取presenter
+     *
      * @return 返回presenter
      */
-    protected abstract P createPresenter();
+    protected abstract BasePresenter<V> createPresenter();
 
     /**
      * 初始化
      */
-    protected void init(){}
+    protected void init() {
+    }
 
     /**
      * 用于控制当前activity是否适配小白条（导航条）
      * 复写即可更改
+     *
      * @return 是否适配
      */
-    protected boolean isAdaptGestures(){return true;}
+    protected boolean isAdaptGestures() {
+        return true;
+    }
 
 }

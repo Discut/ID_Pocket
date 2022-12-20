@@ -1,13 +1,18 @@
 package com.discut.pocket.view;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.WindowInsetsCompat;
 
@@ -16,16 +21,19 @@ import com.discut.pocket.bean.account.Account;
 import com.discut.pocket.bean.Tag;
 import com.discut.pocket.component.InfoCard;
 import com.discut.pocket.mvp.BaseActivity;
+import com.discut.pocket.mvp.BasePresenter;
 import com.discut.pocket.presenter.ShowAccountPresenter;
+import com.discut.pocket.presenter.intf.IShowAccountPresenter;
 import com.discut.pocket.utils.ColorTransform;
 import com.discut.pocket.view.intf.IShowAccountView;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.transition.platform.MaterialContainerTransform;
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback;
 
-public class ShowAccountActivity extends BaseActivity<ShowAccountPresenter, IShowAccountView> implements IShowAccountView {
+public class ShowAccountActivity extends BaseActivity<IShowAccountPresenter, IShowAccountView> implements IShowAccountView {
     private Account account;
 
     @Override
@@ -77,7 +85,7 @@ public class ShowAccountActivity extends BaseActivity<ShowAccountPresenter, ISho
         ((InfoCard) findViewById(R.id.account_password_card)).setDetails(account.getPassword());
         ((InfoCard) findViewById(R.id.account_note_card)).setDetails(account.getNote());
 
-        ChipGroup chipGroup = (ChipGroup) findViewById(R.id.account_tags_card);
+        ChipGroup chipGroup = findViewById(R.id.account_tags_card);
         for (Tag tag :
                 account.getTags()) {
             @SuppressLint("ResourceType") Chip newChip =
@@ -94,6 +102,42 @@ public class ShowAccountActivity extends BaseActivity<ShowAccountPresenter, ISho
             newChip.setChipBackgroundColor(ColorStateList.valueOf(color));
             chipGroup.addView(newChip);
         }
+
+        initListener();
+    }
+
+    private void initListener() {
+        BottomAppBar appBar = findViewById(R.id.bottomAppBar);
+        appBar.setOnMenuItemClickListener(item -> {
+                    switch (item.getItemId()) {
+                        case R.id.menu_share: {
+                            Intent intent = new Intent();
+                            intent.setAction(Intent.ACTION_SEND);
+                            intent.putExtra(Intent.EXTRA_TEXT, "账号：" + account.getAccount() + "\n密码：" + account.getPassword());
+                            intent.setType("text/plain");
+                            startActivity(Intent.createChooser(intent, "发送到..."));
+                            break;
+                        }
+                        case R.id.menu_modify: {
+                            // TODO 修改account按钮点击事件
+                            break;
+                        }
+                        case R.id.menu_delete: {
+                            presenter.deleteAccount(account);
+                            MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(this);
+                            materialAlertDialogBuilder.setTitle("确定删除吗？").setPositiveButton("确认", (dialog, which) -> {
+                                presenter.deleteAccount(account);
+                                finish();
+                            }).setNeutralButton("取消", (dialog, which) -> {
+
+                            }).show();
+                            break;
+                        }
+
+                    }
+                    return false;
+                }
+        );
     }
 
     @Override
@@ -102,7 +146,7 @@ public class ShowAccountActivity extends BaseActivity<ShowAccountPresenter, ISho
     }
 
     @Override
-    protected ShowAccountPresenter createPresenter() {
+    protected BasePresenter<IShowAccountView> createPresenter() {
         return new ShowAccountPresenter();
     }
 

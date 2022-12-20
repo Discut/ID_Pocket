@@ -2,6 +2,8 @@ package com.discut.pocket.presenter;
 
 import com.discut.pocket.bean.account.Account;
 import com.discut.pocket.bean.Tag;
+import com.discut.pocket.dao.ITagDao;
+import com.discut.pocket.dao.iplm.TagDao;
 import com.discut.pocket.model.AccountModelAbstractFactory;
 import com.discut.pocket.model.AccountModelFactory;
 import com.discut.pocket.model.BaseAccountModel;
@@ -9,15 +11,20 @@ import com.discut.pocket.mvp.BasePresenter;
 import com.discut.pocket.view.intf.IAccountListView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class AccountListPresenter extends BasePresenter<IAccountListView> {
     boolean key = false;
 
+    private ITagDao tagDao = new TagDao();
+
+
     public void update(Tag selectedTag) {
         // TODO 在没有进行account更新时，请不要更新界面 这样会吧item一起更新 导致item丢失transitionName 动画无法正确返回
-        if (key)
-            return;
+//        if (key)
+//            return;
         IAccountListView iAccountListView = reference.get();
 
 
@@ -25,6 +32,22 @@ public class AccountListPresenter extends BasePresenter<IAccountListView> {
 
         BaseAccountModel baseAccountModel = accountModelAbstractFactory.create();
         List<Account> all = baseAccountModel.getAll();
+
+        if (selectedTag == null) {
+            iAccountListView.updateAccountList(all);
+        }else {
+            ArrayList<Account> accounts = new ArrayList<>();
+            for (Account account: all){
+                Iterator<Tag> iterator = Arrays.stream(account.getTags()).iterator();
+                while (iterator.hasNext()){
+                    if (iterator.next().getName().equals(selectedTag.getName())){
+                        accounts.add(account);
+                        break;
+                    }
+                }
+            }
+            iAccountListView.updateAccountList(accounts);
+        }
 
 
 //        ArrayList<Account> accountList = new ArrayList<>();
@@ -45,16 +68,15 @@ public class AccountListPresenter extends BasePresenter<IAccountListView> {
 //        }
 //        iAccountListView.updateAccountList(accountList);
 
-        iAccountListView.updateAccountList(all);
+        List<Tag> tags = tagDao.getAll();
 
-        List<Tag> tags = new ArrayList<>();
 
-        for (int i = 0; i < 4; i++) {
-            Tag tag = new Tag();
-            tag.setName("Tag" + i);
-            tag.setColor("#d7c5e6");
-            tags.add(tag);
-        }
+//        for (int i = 0; i < 4; i++) {
+//            Tag tag = new Tag();
+//            tag.setName("Tag" + i);
+//            tag.setColor("#d7c5e6");
+//            tags.add(tag);
+//        }
         key = true;
         iAccountListView.updateTags(tags);
     }

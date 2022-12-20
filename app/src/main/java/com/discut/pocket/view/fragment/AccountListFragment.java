@@ -98,9 +98,9 @@ public class AccountListFragment extends BaseFragment<AccountListPresenter, IAcc
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("account", account);
                         intent.putExtras(bundle);
-                        if (AnimationConfig.getInstance().isEnableAnimation()){
+                        if (AnimationConfig.getInstance().isEnableAnimation()) {
                             startActivity(intent, options.toBundle());
-                        }else {
+                        } else {
                             startActivity(intent);
                         }
                     }
@@ -128,6 +128,9 @@ public class AccountListFragment extends BaseFragment<AccountListPresenter, IAcc
                 color = ResourcesCompat.getColor(getResources(), R.color.chip_background_color, null);
             }
             defaultChip.setChipBackgroundColor(ColorStateList.valueOf(color));
+        });
+        defaultChip.setOnClickListener(v -> {
+            presenter.update(null);
         });
         chipGroup.addView(defaultChip);
 

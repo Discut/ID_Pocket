@@ -9,22 +9,19 @@
             app:showAsAction="always"
             />-->
     <item
-        android:id="@+id/menu_home"
-        android:icon="@drawable/ic_border_color"
+        android:id="@+id/menu_modify"
         android:fillColor="@android:color/white"
+        android:icon="@drawable/ic_border_color"
         android:title="home"
-        app:showAsAction="always"
-        />
+        app:showAsAction="always" />
     <item
-        android:id="@+id/menu_list"
+        android:id="@+id/menu_share"
         android:icon="@drawable/ic_share"
         android:title="list"
-        app:showAsAction="always"
-        />
+        app:showAsAction="always" />
     <item
-        android:id="@+id/menu_settings"
+        android:id="@+id/menu_delete"
         android:icon="@drawable/ic_delete"
         android:title="setting"
-        app:showAsAction="always"
-        />
+        app:showAsAction="always" />
 </menu>

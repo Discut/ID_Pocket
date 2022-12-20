@@ -53,6 +53,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, IHomeView> impleme
             v.setPaddingRelative(v.getPaddingStart(), top, v.getPaddingEnd(), v.getPaddingBottom());
             return insets;
         });
+
     }
 
     @Override
@@ -191,5 +192,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, IHomeView> impleme
 
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
+
+
 
 }

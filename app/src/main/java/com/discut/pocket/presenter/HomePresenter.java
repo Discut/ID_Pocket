@@ -19,7 +19,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
             AccountModelFactory accountModelFactory = new AccountModelFactory();
             BaseAccountModel baseAccountModel = accountModelFactory.create();
             accountList = baseAccountModel.getAll();
-
         }
 
 /*        if (!key){

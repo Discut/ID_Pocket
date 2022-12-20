@@ -1,6 +1,7 @@
 package com.discut.pocket.model;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.NonNull;
@@ -39,7 +40,20 @@ public class SaveAccountModel implements ISaveAccountModel {
         contentValues.put("password", account.getPassword());
         contentValues.put("note", account.getNote());
         if (account.getStatus() == AccountStatus.NEW) {
-            db.insert("account", null, contentValues);
+            long insert = db.insert("account", null, contentValues);
+            if (insert > 0) {
+                try (Cursor query = db.query("account", null, null, null, null, null, "id DESC", "0,1")) {
+                    if (query.moveToFirst()) {
+                        if (query.getCount() != 0) {
+                            do {
+                                for (Tag tag : account.getTags()) {
+                                    tag.setAccountId(Integer.parseInt(query.getString(0)));
+                                }
+                            } while (query.moveToNext());
+                        }
+                    }
+                }
+            }
             saveTags(Arrays.asList(account.getTags()));
             return true;
         } else if (account.getStatus() == AccountStatus.MODIFIED) {
