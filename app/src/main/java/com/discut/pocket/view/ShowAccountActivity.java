@@ -123,7 +123,7 @@ public class ShowAccountActivity extends BaseActivity<IShowAccountPresenter, ISh
                             break;
                         }
                         case R.id.menu_delete: {
-                            presenter.deleteAccount(account);
+                            //presenter.deleteAccount(account);
                             MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(this);
                             materialAlertDialogBuilder.setTitle("确定删除吗？").setPositiveButton("确认", (dialog, which) -> {
                                 presenter.deleteAccount(account);

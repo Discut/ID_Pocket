@@ -23,8 +23,8 @@ public class ReadAccountModel implements IReadAccountModel {
     @Override
     public List<Account> readAll() {
         List<Account> accounts = new ArrayList<>();
-        try(        @SuppressLint("Recycle") Cursor cursor = db.query("account", new String[]{"id", "title", "account", "password", "note"}, null, null, null, null, null);
-        ){
+        try (@SuppressLint("Recycle") Cursor cursor = db.query("account", new String[]{"id", "title", "account", "password", "note"}, null, null, null, null, null)
+        ) {
             if (cursor.moveToFirst()) {
                 if (cursor.getCount() != 0) {
                     do {
@@ -36,14 +36,15 @@ public class ReadAccountModel implements IReadAccountModel {
                         account.setNote(cursor.getString(4));
                         List<Tag> tags = new ArrayList<Tag>();
 
-                        try (@SuppressLint("Recycle") Cursor cursor1 = db.query("tag", new String[]{"name", "color"}, "account_id=" + account.getId(), null, null, null, null)
+                        try (@SuppressLint("Recycle") Cursor cursor1 = db.query("tag", new String[]{"name", "account_id", "color"}, "account_id=" + account.getId(), null, null, null, null)
                         ) {
                             if (cursor1.moveToFirst()) {
                                 if (cursor1.getCount() != 0) {
                                     do {
                                         Tag tag = new Tag();
                                         tag.setName(cursor1.getString(0));
-                                        tag.setColor(cursor1.getString(1));
+                                        tag.setAccountId(cursor1.getInt(1));
+                                        tag.setColor(cursor1.getString(2));
                                         tags.add(tag);
                                     } while (cursor1.moveToNext());
                                 }

@@ -50,7 +50,7 @@ public class TagDao extends BaseDao<Tag> implements ITagDao {
 
     @Override
     public boolean delete(Tag tag) {
-        int delete = getDB().delete(tableName(), "name=?", new String[]{tag.getName()});
+        int delete = getDB().delete(tableName(), "name=? AND account_id=?", new String[]{tag.getName(), String.valueOf(tag.getAccountId())});
         return delete > 0;
     }
 

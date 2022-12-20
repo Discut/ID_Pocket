@@ -65,6 +65,16 @@ public class SaveAccountModel implements ISaveAccountModel {
         }
     }
 
+    @Override
+    public boolean delete(Account account) {
+        ITagDao tagDao = new TagDao();
+        int delete = db.delete("account", "id=?", new String[]{account.getId()});
+        for (Tag tag : account.getTags()) {
+            tagDao.delete(tag);
+        }
+        return delete > 0;
+    }
+
     private void saveTag(@NonNull Tag tag) {
         if (!isExist(tag)) {
             tagDao.insert(tag);

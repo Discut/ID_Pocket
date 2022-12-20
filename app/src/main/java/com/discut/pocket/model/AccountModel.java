@@ -5,16 +5,22 @@ import com.discut.pocket.bean.AccountStatus;
 
 import java.util.List;
 
-public class AccountModel extends BaseAccountModel{
+public class AccountModel extends BaseAccountModel {
     List<Account> accounts;
+
     protected AccountModel() {
+    }
+
+    @Override
+    public boolean delete(Account account) {
+        return saveModel.delete(account);
     }
 
     @Override
     public void update() {
         for (Account account : accounts) {
             boolean b = account.getStatus() == AccountStatus.NEW;
-            if (b){
+            if (b) {
                 saveModel.save(account);
             }
         }
@@ -38,4 +44,6 @@ public class AccountModel extends BaseAccountModel{
     public void save(List<Account> accounts) {
         saveModel.saveAll(accounts);
     }
+
+
 }
