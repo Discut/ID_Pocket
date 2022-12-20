@@ -68,7 +68,7 @@ public class AccountListPresenter extends BasePresenter<IAccountListView> {
 //        }
 //        iAccountListView.updateAccountList(accountList);
 
-        List<Tag> tags = tagDao.getAll();
+        List<Tag> tags = tagDao.getOnlyTags();
 
 
 //        for (int i = 0; i < 4; i++) {

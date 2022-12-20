@@ -48,6 +48,8 @@ public class TagDao extends BaseDao<Tag> implements ITagDao {
         return tags;
     }
 
+
+
     @Override
     public boolean delete(Tag tag) {
         int delete = getDB().delete(tableName(), "name=? AND account_id=?", new String[]{tag.getName(), String.valueOf(tag.getAccountId())});
@@ -65,6 +67,24 @@ public class TagDao extends BaseDao<Tag> implements ITagDao {
     public boolean deleteTagsBy(String accountId) {
         int delete = getDB().delete(tableName(), "account_id=?", new String[]{accountId});
         return delete > 0;
+    }
+
+    @Override
+    public List<Tag> getOnlyTags() {
+        @SuppressLint("Recycle")
+        //Cursor cursor = getDB().query(tableName(), new String[]{"distinct name", "account_id", "color"}, null, null, null, null, null);
+        Cursor cursor = getDB().query(tableName(), new String[]{"distinct name"}, null, null, null, null, null);
+        List<Tag> tags = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            if (cursor.getCount() != 0) {
+                do {
+                    Tag tag = new Tag();
+                    tag.setName(cursor.getString(0));
+                    tags.add(tag);
+                } while (cursor.moveToNext());
+            }
+        }
+        return tags;
     }
 
     @Override

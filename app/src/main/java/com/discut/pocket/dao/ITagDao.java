@@ -15,4 +15,6 @@ public interface ITagDao {
     boolean update(Tag tag);
 
     boolean deleteTagsBy(String accountId);
+
+    List<Tag> getOnlyTags();
 }

@@ -1,7 +1,5 @@
 package com.discut.pocket.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 import com.discut.pocket.R;
@@ -10,9 +8,6 @@ import com.discut.pocket.bean.AccountStatus;
 import com.discut.pocket.bean.Tag;
 import com.discut.pocket.bean.account.Account;
 import com.discut.pocket.component.TagInputView;
-import com.discut.pocket.model.AccountModelAbstractFactory;
-import com.discut.pocket.model.AccountModelFactory;
-import com.discut.pocket.model.BaseAccountModel;
 import com.discut.pocket.mvp.BaseActivity;
 import com.discut.pocket.mvp.BasePresenter;
 import com.discut.pocket.presenter.ModifyAccountPresenter;

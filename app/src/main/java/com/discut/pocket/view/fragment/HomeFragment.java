@@ -57,10 +57,11 @@ public class HomeFragment extends BaseFragment<HomePresenter, IHomeView> impleme
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         presenter.update();
     }
+
 
     @Override
     protected void initData() {
@@ -124,7 +125,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, IHomeView> impleme
     @Override
     public void updateAccountList(List<Account> accounts) {
         RecyclerView recyclerView = findViewBy(R.id.account_card_content);
-        if (recyclerView.getAdapter() == null) {
+        //if (recyclerView.getAdapter() == null) {
             RecyclerAdaptor adaptor = new RecyclerAdaptor(accounts);
             adaptor.setListener(
                     new RecyclerAdaptor.ItemClickListener() {
@@ -146,9 +147,10 @@ public class HomeFragment extends BaseFragment<HomePresenter, IHomeView> impleme
             );
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.setAdapter(adaptor);
-        }
+       // }
 
-        RecyclerAnimation recyclerAnimation = new RecyclerAnimation(getContext());
+
+       /* RecyclerAnimation recyclerAnimation = new RecyclerAnimation(getContext());
 
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(recyclerAnimation);
@@ -164,8 +166,8 @@ public class HomeFragment extends BaseFragment<HomePresenter, IHomeView> impleme
                         Log.d("TAG", "onLeftSwipe: 向左滑动" + mode);
 
                         recyclerAnimation.clearView(recyclerView, view);
-/*                        recyclerView.getAdapter().notifyItemChanged(view.getAdapterPosition());
-                        recyclerView.setAdapter(getAdaptor(accounts));*/
+*//*                        recyclerView.getAdapter().notifyItemChanged(view.getAdapterPosition());
+                        recyclerView.setAdapter(getAdaptor(accounts));*//*
                         recyclerView.getAdapter().notifyItemChanged(view.getAdapterPosition());
 
 
@@ -190,7 +192,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, IHomeView> impleme
                 });
 
 
-        itemTouchHelper.attachToRecyclerView(recyclerView);
+        itemTouchHelper.attachToRecyclerView(recyclerView);*/
     }
 
 

@@ -123,7 +123,7 @@ public class ShowAccountActivity extends BaseActivity<IShowAccountPresenter, ISh
         baseAccountModel.update();
         List<Account> all = baseAccountModel.getAll();
         for (Account account : all) {
-            if (account.getId().equals(account.getId())) {
+            if (account.getId().equals(this.account.getId())) {
                 this.account = account;
                 initData();
                 break;

@@ -106,7 +106,7 @@ public class SaveAccountModel implements ISaveAccountModel {
 
     private boolean isExist(Tag tag) {
         for (Tag tag1 : tagDao.getAll()) {
-            if (tag1.getName().equals(tag.getName())) {
+            if (tag1.getName().equals(tag.getName()) && tag1.getAccountId() == tag.getAccountId()) {
                 return true;
             }
         }
