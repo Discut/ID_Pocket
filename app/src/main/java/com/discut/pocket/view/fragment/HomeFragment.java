@@ -2,27 +2,19 @@ package com.discut.pocket.view.fragment;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 
-import androidx.core.content.ContextCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.discut.pocket.R;
 import com.discut.pocket.adaptor.RecyclerAdaptor;
 import com.discut.pocket.bean.account.Account;
-import com.discut.pocket.bean.AccountStatus;
-import com.discut.pocket.component.AccountCard;
-import com.discut.pocket.component.RecyclerAnimation;
-import com.discut.pocket.component.SwipeSelectMode;
 import com.discut.pocket.configuration.AnimationConfig;
 import com.discut.pocket.mvp.BaseFragment;
 import com.discut.pocket.presenter.HomePresenter;

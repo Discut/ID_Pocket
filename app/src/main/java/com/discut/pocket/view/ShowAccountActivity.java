@@ -1,24 +1,25 @@
 package com.discut.pocket.view;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.discut.pocket.R;
-import com.discut.pocket.bean.account.Account;
 import com.discut.pocket.bean.Tag;
+import com.discut.pocket.bean.account.Account;
 import com.discut.pocket.component.InfoCard;
 import com.discut.pocket.model.AccountModelAbstractFactory;
 import com.discut.pocket.model.AccountModelFactory;
@@ -33,12 +34,13 @@ import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.transition.platform.MaterialContainerTransform;
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback;
 
 import java.util.List;
 
-public class ShowAccountActivity extends BaseActivity<IShowAccountPresenter, IShowAccountView> implements IShowAccountView {
+public class ShowAccountActivity extends BaseActivity<IShowAccountPresenter, IShowAccountView> implements IShowAccountView, View.OnLongClickListener {
     private Account account;
 
     @Override
@@ -60,6 +62,7 @@ public class ShowAccountActivity extends BaseActivity<IShowAccountPresenter, ISh
     protected void init() {
         super.init();
         account = (Account) getIntent().getSerializableExtra("account");
+        presenter.recordAccount(account);
     }
 
     @Override
@@ -82,6 +85,12 @@ public class ShowAccountActivity extends BaseActivity<IShowAccountPresenter, ISh
 
         BottomAppBar bottomAppBar = findViewById(R.id.bottomAppBar);
         bottomAppBar.setNavigationOnClickListener(v -> onBackPressed());
+
+
+        // 注册复制文字事件
+        ((InfoCard)findViewById(R.id.account_account_card)).setOnLongClickListener(v -> onLongClick(findViewById(R.id.account_account_card)));
+        ((InfoCard)findViewById(R.id.account_password_card)).setOnLongClickListener(v -> onLongClick(findViewById(R.id.account_password_card)));
+        ((InfoCard)findViewById(R.id.account_note_card)).setOnLongClickListener(v -> onLongClick(findViewById(R.id.account_note_card)));
 
         initData();
 
@@ -161,6 +170,14 @@ public class ShowAccountActivity extends BaseActivity<IShowAccountPresenter, ISh
                             }).show();
                             break;
                         }
+                        case R.id.menu_copy:{
+                            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                            ClipData clip = ClipData.newPlainText("password", account.getPassword());
+                            clipboard.setPrimaryClip(clip);
+                            ClipData clip1 = ClipData.newPlainText("account", account.getAccount());
+                            clipboard.setPrimaryClip(clip1);
+                            showMsg("已复制");
+                        }
 
                     }
                     return false;
@@ -180,6 +197,17 @@ public class ShowAccountActivity extends BaseActivity<IShowAccountPresenter, ISh
 
     @Override
     public void showMsg(String msg) {
+        Snackbar make = Snackbar.make(findViewById(R.id.container_box), msg, Snackbar.LENGTH_SHORT);
+        make.setAnchorView(R.id.bottomAppBar);
+        make.show();
+    }
 
+    @Override
+    public boolean onLongClick(View v) {
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(((InfoCard) v).getTitle(), ((InfoCard) v).getDetails());
+        clipboard.setPrimaryClip(clip);
+        showMsg("已复制");
+        return true;
     }
 }

@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface IAccountListView extends IView {
     void updateAccountList(List<Account> accounts);
-    void updateTags(List<Tag> tags);
+    void updateTags(List<Tag> tags, Tag selected);
 }

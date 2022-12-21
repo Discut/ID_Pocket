@@ -114,7 +114,7 @@ public class RecyclerAdaptor extends RecyclerView.Adapter<RecyclerAdaptor.InnerH
                 @SuppressLint("ResourceType") TextView newChip =
                         (TextView) LayoutInflater.from(context).inflate(R.xml.chip_show, chipGroup, false);
                 newChip.setText(tag.getName());
-                newChip.setBackgroundTintList(ColorTransform.from(context.getResources(), R.color.purple_200));
+                newChip.setBackgroundTintList(ColorTransform.from(context.getResources(), R.color.theme_main));
                 chipGroup.addView(newChip);
             }
         }

@@ -32,7 +32,7 @@ public class AccountUsedDao extends BaseDao<AccountUsed> implements IAccountUsed
 
     @Override
     public List<AccountUsed> find(int number) {
-        Cursor cursor = getDB().query(tableName(), null, null, null, null, null, "date ASC", 0 + "," + number);
+        Cursor cursor = getDB().query(tableName(), null, null, null, null, null, "date DESC", 0 + "," + number);
         List<AccountUsed> accountUsedList = new ArrayList<>();
         if (cursor.moveToFirst()) {
             if (cursor.getCount() != 0) {

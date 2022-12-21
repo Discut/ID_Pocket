@@ -11,6 +11,7 @@
     tools:context=".view.ShowAccountActivity">
 
     <LinearLayout
+        android:id="@+id/container_box"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -73,6 +74,7 @@
 
 
                 <com.discut.pocket.component.InfoCard
+                    android:longClickable="true"
                     android:id="@+id/account_account_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

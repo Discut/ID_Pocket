@@ -78,6 +78,6 @@ public class AccountListPresenter extends BasePresenter<IAccountListView> {
 //            tags.add(tag);
 //        }
         key = true;
-        iAccountListView.updateTags(tags);
+        iAccountListView.updateTags(tags, selectedTag);
     }
 }

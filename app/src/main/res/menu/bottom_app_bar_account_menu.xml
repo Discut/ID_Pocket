@@ -9,6 +9,11 @@
             app:showAsAction="always"
             />-->
     <item
+        android:id="@+id/menu_copy"
+        android:icon="@drawable/ic_copy_1"
+        android:title="copy"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/menu_modify"
         android:fillColor="@android:color/white"
         android:icon="@drawable/ic_border_color"

@@ -93,4 +93,5 @@
         <item name="fontPrimaryColor">@color/font_color_primary_night</item>
         <item name="fontSecondaryColor">@color/font_color_second_night</item>
     </style>
+
 </resources>
