@@ -14,6 +14,8 @@
 
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/gray_100</item>
+
+        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
     <!--    child application theme-->
     <style name="Theme.Pocket.Pink" parent="Theme.Pocket">

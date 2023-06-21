@@ -9,7 +9,10 @@ import android.view.WindowManager;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.discut.pocket.R;
 import com.discut.pocket.utils.WindowUtil;
@@ -50,12 +53,11 @@ public abstract class BaseActivity<P, V extends IView> extends AppCompatActivity
             // 适配导航条
             WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            getWindow().setNavigationBarColor(Color.TRANSPARENT);
+            WindowInsetsControllerCompat insetsController = WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView());
+            //insetsController.hide(WindowInsetsCompat.Type.navigationBars());
+            insetsController.setAppearanceLightNavigationBars(false);
         }
-
         WindowUtil.setStatusBarTextColor(this, getWindow().getStatusBarColor());
-
-        //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         initListener();
     }
 
